@@ -11,34 +11,34 @@ import frc.robot.subsystems.Shooter;
 
 public class CommandShooter extends CommandBase {
 
-  private Timer timer = new Timer();
-  private Shooter shooter;
+    private Timer timer = new Timer();
+    private Shooter shooter;
 
 
-  public CommandShooter(Shooter shooter) {
-    addRequirements(shooter);
-    this.shooter = shooter;
-  }
-  
-  @Override
-  public void initialize() {
-    timer.reset();
-    timer.start();
-  }
+    public CommandShooter(Shooter shooter) {
+        addRequirements(shooter);
+        this.shooter = shooter;
+    }
 
-  @Override
-  public void execute() {
-    shooter.turnStandShooter();
-  }
+    @Override
+    public void initialize() {
+        timer.reset();
+        timer.start();
+    }
 
- 
-  @Override
-  public void end(boolean interrupted) {
-    shooter.turnOffShooter();
-  }
+    @Override
+    public void execute() {
+        shooter.turnStandShooter();
+    }
 
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+
+    @Override
+    public void end(boolean interrupted) {
+        shooter.turnOffShooter();
+    }
+
+    @Override
+    public boolean isFinished() {
+        return false;
+    }
 }

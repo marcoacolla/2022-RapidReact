@@ -12,27 +12,27 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
 
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+    private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+    private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private final XboxController m_joystick = new XboxController(0);
+    private final XboxController m_joystick = new XboxController(0);
 
-  private Shooter shooter = new Shooter();
+    private Shooter shooter = new Shooter();
 
- 
-  public RobotContainer() {
-    configureButtonBindings();
-  }
 
-  private void configureButtonBindings() {
-    // kB = botão B do controle
-    final JoystickButton kB = new JoystickButton(m_joystick, 2);
-    kB.whenHeld(new CommandShooter(shooter));
-    kB.whenReleased(new CommandShooter2(shooter));
-  }
+    public RobotContainer() {
+        configureButtonBindings();
+    }
 
-  public Command getAutonomousCommand() {
-    return m_autoCommand;
-  }
+    private void configureButtonBindings() {
+        // kB = botão B do controle
+        final JoystickButton kB = new JoystickButton(m_joystick, 2);
+        kB.whenHeld(new CommandShooter(shooter));
+        kB.whenReleased(new CommandShooter2(shooter));
+    }
+
+    public Command getAutonomousCommand() {
+        return m_autoCommand;
+    }
 }
