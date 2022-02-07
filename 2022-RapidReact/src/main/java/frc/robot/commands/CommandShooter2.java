@@ -5,16 +5,13 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
-
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
 public class CommandShooter2 extends CommandBase {
-
-    private Timer timer = new Timer();
-    private double time = 0;
-    private Shooter shooter;
-
+    private final Timer timer = new Timer();
+    private double executeTime;
+    private final Shooter shooter;
 
     public CommandShooter2(Shooter shooter) {
         addRequirements(shooter);
@@ -29,9 +26,8 @@ public class CommandShooter2 extends CommandBase {
 
     @Override
     public void execute() {
-        time = timer.get();
+        executeTime = timer.get();
         shooter.turnOnShooter();
-
     }
 
     @Override
@@ -41,6 +37,6 @@ public class CommandShooter2 extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return time > 1.5;
+        return executeTime > 1.5;
     }
 }
