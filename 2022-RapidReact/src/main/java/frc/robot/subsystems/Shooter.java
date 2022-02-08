@@ -5,35 +5,30 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
+    private final WPI_TalonSRX rightMotor = new WPI_TalonSRX(Constants.SHOOTER_RIGHT_MOTOR_SHOOTER_ID);
+    private final WPI_TalonSRX leftMotor = new WPI_TalonSRX(Constants.SHOOTER_LEFT_MOTOR_SHOOTER_ID);
 
-  private WPI_TalonSRX rightMotor = new WPI_TalonSRX(Constants.ShooterRightMotorShooterID);
-  private WPI_TalonSRX leftMotor = new WPI_TalonSRX(Constants.ShooterLeftMotorShooterID);
+    public Shooter() {
+        rightMotor.configFactoryDefault();
+        leftMotor.configFactoryDefault();
+    }
 
-  
-  public Shooter() {
-    rightMotor.configFactoryDefault();
-    leftMotor.configFactoryDefault();
-    
-  }
+    public void turnOnShooter() {
+        rightMotor.set(Constants.SHOOTER_VELOCITY);
+        leftMotor.set(Constants.SHOOTER_VELOCITY);
+    }
 
-  public void turnOnShooter() {
-    rightMotor.set(Constants.ShooterVelocity);
-    leftMotor.set(Constants.ShooterVelocity);
-  }
+    public void turnStandShooter() {
+        rightMotor.set(-Constants.SHOOTER_LOW_VELOCITY);
+        leftMotor.set(-Constants.SHOOTER_LOW_VELOCITY);
+    }
 
-  public void turnStandShooter() {
-    rightMotor.set(-Constants.ShooterLowVelocity);
-    leftMotor.set(-Constants.ShooterLowVelocity);
-  }
-
-  public void turnOffShooter() {
-    rightMotor.set(0);
-    leftMotor.set(0);
-  }
-
+    public void turnOffShooter() {
+        rightMotor.set(0);
+        leftMotor.set(0);
+    }
 }
