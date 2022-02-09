@@ -15,16 +15,12 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         rightMotor.configFactoryDefault();
         leftMotor.configFactoryDefault();
+        leftMotor.setInverted(true);
     }
 
     public void turnOnShooter() {
         rightMotor.set(Constants.SHOOTER_VELOCITY);
         leftMotor.set(Constants.SHOOTER_VELOCITY);
-    }
-
-    public void turnStandShooter() {
-        rightMotor.set(-Constants.SHOOTER_LOW_VELOCITY);
-        leftMotor.set(-Constants.SHOOTER_LOW_VELOCITY);
     }
 
     public void turnOffShooter() {

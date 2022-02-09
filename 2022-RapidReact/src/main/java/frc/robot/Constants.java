@@ -17,4 +17,5 @@ public final class Constants {
     public static final int SHOOTER_LEFT_MOTOR_SHOOTER_ID = 5;
     public static final double SHOOTER_VELOCITY = 0.8;
     public static final double SHOOTER_LOW_VELOCITY = 0.3;
+    public static final int BUTTON_B_ID = 2;
 }

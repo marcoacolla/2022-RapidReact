@@ -8,25 +8,22 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class CommandShooter2 extends CommandBase {
-    private final Timer timer = new Timer();
-    private double executeTime;
+public class ShootWithShooter extends CommandBase {
     private final Shooter shooter;
 
-    public CommandShooter2(Shooter shooter) {
+    private Timer timer = new Timer();
+
+    public ShootWithShooter(Shooter shooter) {
         addRequirements(shooter);
         this.shooter = shooter;
     }
 
     @Override
     public void initialize() {
-        timer.reset();
-        timer.start();
     }
 
     @Override
     public void execute() {
-        executeTime = timer.get();
         shooter.turnOnShooter();
     }
 
@@ -37,6 +34,6 @@ public class CommandShooter2 extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return executeTime > 1.5;
+        return timer.get() > 1.5;
     }
 }

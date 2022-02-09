@@ -6,15 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
-
-    private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-    private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
     private final XboxController m_joystick = new XboxController(0);
 
@@ -27,9 +21,8 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         // kB = botão B do controle
-        final JoystickButton kB = new JoystickButton(m_joystick, 2);
-        kB.whenHeld(new CommandShooter(shooter));
-        kB.whenReleased(new CommandShooter2(shooter));
+        final JoystickButton kB = new JoystickButton(m_joystick, constants.BUTTON_B_ID);
+        kB.whenPressed(new ShootWithShooter(shooter));
     }
 
     public Command getAutonomousCommand() {
