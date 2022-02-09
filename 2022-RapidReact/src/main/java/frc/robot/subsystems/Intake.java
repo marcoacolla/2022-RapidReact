@@ -4,19 +4,29 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class ExampleSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
+public class Intake extends SubsystemBase {
+  /** Creates a new Intake. */
+  
+  private final VictorSP intakeMotor;
+
+  public Intake() {  
+  intakeMotor = new VictorSP(Constants.intakeMotor);
+  }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
   }
 
-  @Override
-  public void simulationPeriodic() {
-    // This method will be called once per scheduler run during simulation
-  }
+  public void grabBalls(double speed) {
+  intakeMotor.set(speed);
+}
+
+  public void stopIntake() {
+  intakeMotor.set(0);
+}
 }
