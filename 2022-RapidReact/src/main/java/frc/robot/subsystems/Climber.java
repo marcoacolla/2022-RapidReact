@@ -10,7 +10,7 @@ import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
   
-  private final WPI_TalonSRX climberTalonSRX = new WPI_TalonSRX(Constants.ClimberID);
+  private final WPI_TalonSRX climberTalonSRX = new WPI_TalonSRX(Constants.CLIMBER_ID);
 
   public Climber() {}
 

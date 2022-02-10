@@ -5,6 +5,7 @@
 package frc.robot;
 
 import frc.robot.subsystems.Climber;
+import frc.robot.Constants;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ClimberExtend;
@@ -29,10 +30,10 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private final JoystickButton buttonRb = new JoystickButton(RobotContainer.controller, 6);
-  private final JoystickButton buttonLb = new JoystickButton(RobotContainer.controller, 5);
+  private final JoystickButton buttonRb = new JoystickButton(RobotContainer.controller, Constants.BUTTON_RB_ID);
+  private final JoystickButton buttonLb = new JoystickButton(RobotContainer.controller, Constants.BUTTON_LB_ID);
 
-  public static final XboxController controller = new XboxController(Constants.ControllerID);
+  public static final XboxController controller = new XboxController(Constants.CONTROLLER_ID);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -46,8 +47,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonRb.whenPressed(new ClimberExtend(climber, Constants.ClimberSpeed));
-    buttonLb.whenPressed(new ClimberRetract(climber, Constants.ClimberSpeed));
+    buttonRb.whenPressed(new ClimberExtend(climber, Constants.CLIMBER_SPEED));
+    buttonLb.whenPressed(new ClimberRetract(climber, Constants.CLIMBER_SPEED));
   }
 
   /**
