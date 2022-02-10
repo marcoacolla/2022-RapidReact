@@ -29,9 +29,10 @@ public class RobotContainer {
 
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
-  private final JoystickButton buttonRb = new JoystickButton(Constants.controller, 6);
-  private final JoystickButton buttonLb = new JoystickButton(Constants.controller, 5);
+  private final JoystickButton buttonRb = new JoystickButton(RobotContainer.controller, 6);
+  private final JoystickButton buttonLb = new JoystickButton(RobotContainer.controller, 5);
 
+  public static final XboxController controller = new XboxController(Constants.ControllerID);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -45,8 +46,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonRb.whenPressed(new ClimberExtend(climber, 0.5));
-    buttonLb.whenPressed(new ClimberRetract(climber, 0.5));
+    buttonRb.whenPressed(new ClimberExtend(climber, Constants.ClimberSpeed));
+    buttonLb.whenPressed(new ClimberRetract(climber, Constants.ClimberSpeed));
   }
 
   /**

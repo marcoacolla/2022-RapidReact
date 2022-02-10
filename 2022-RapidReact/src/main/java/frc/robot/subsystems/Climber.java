@@ -5,13 +5,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
   
-  private final WPI_TalonSRX climberTalonSRX = new WPI_TalonSRX(Constants.m_climberID);
+  private final WPI_TalonSRX climberTalonSRX = new WPI_TalonSRX(Constants.ClimberID);
 
   public Climber() {}
 

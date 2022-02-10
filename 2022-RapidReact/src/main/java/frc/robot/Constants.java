@@ -18,11 +18,10 @@ import edu.wpi.first.wpilibj.XboxController;
  */
 public final class Constants {
 //Climber
-  public static final int m_climberID= 0;
+public static final int ClimberID= 0;
+public static final double ClimberSpeed = 0.5;
 
-  // Controller ID
-  public static final int controllerID = 0;
- 
-  // Controller
-  public static final XboxController controller = new XboxController(controllerID);
+// Controller ID
+public static final int ControllerID = 0;
+
 }

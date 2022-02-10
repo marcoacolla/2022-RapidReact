@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class ClimberExtend extends CommandBase {
   private Climber climber;
   private double speed;
-  private Timer timerClimberExtend = new Timer();
+  private Timer timer = new Timer();
 
   public ClimberExtend(Climber climber, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -24,8 +24,8 @@ public class ClimberExtend extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    timerClimberExtend.reset();
-    timerClimberExtend.start();
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,14 +39,14 @@ public class ClimberExtend extends CommandBase {
   public void end(boolean interrupted) {
     climber.extendClimber(0);
 
-    timerClimberExtend.reset();
-    timerClimberExtend.stop();
+    timer.reset();
+    timer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timerClimberExtend.get() > 6.0;
+    return timer.get() > 6.0;
   }
 }
 

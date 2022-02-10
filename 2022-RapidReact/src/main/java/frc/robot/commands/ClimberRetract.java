@@ -18,7 +18,7 @@ public class ClimberRetract extends CommandBase {
   
   private Climber climber;
   private double speed;
-  private Timer timerClimerRetract = new Timer();
+  private Timer timer = new Timer();
 
   public ClimberRetract(Climber climber, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -30,8 +30,8 @@ public class ClimberRetract extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    timerClimerRetract.reset();
-    timerClimerRetract.start();
+    timer.reset();
+    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -45,13 +45,13 @@ public class ClimberRetract extends CommandBase {
   public void end(boolean interrupted) {
     climber.retractClimber(0);
 
-    timerClimerRetract.reset();
-    timerClimerRetract.stop();
+    timer.reset();
+    timer.stop();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return timerClimerRetract.get() > 6.0;
+    return timer.get() > 6.0;
   }
 }
