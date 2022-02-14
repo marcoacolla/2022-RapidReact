@@ -14,5 +14,7 @@ package frc.robot;
  */
 public final class Constants {
     //ID do conveyor do storage
-    public static int storageConvID = 0;
+    public static final int STORAGE_CONV_ID = 0;
+    //Velocidade do conveyor
+    public static final double STORAGE_SPEED = 1.0;
 }

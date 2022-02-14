@@ -20,15 +20,14 @@ import frc.robot.subsystems.StorageSystem;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final StorageSystem storageSystem;
-  private final JoystickButton convTrigger;
+  private final JoystickButton kStart;
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-
     //Storage System and Controller
     storageSystem = new StorageSystem();
-    convTrigger =  new JoystickButton(controller, XboxController.Button.kStart.value);
+    kStart =  new JoystickButton(controller, XboxController.Button.kStart.value);
 
     configureButtonBindings();
   }
@@ -40,7 +39,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    convTrigger.whenHeld(new ActivateConveyor(storageSystem, 1.0));
+    kStart.toggleWhenPressed(new ActivateConveyor(storageSystem, Constants.STORAGE_SPEED));
   }
 
   /**
@@ -50,6 +49,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
