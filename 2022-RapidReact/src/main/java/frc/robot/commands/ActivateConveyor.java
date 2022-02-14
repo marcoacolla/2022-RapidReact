@@ -11,11 +11,11 @@ public class ActivateConveyor extends CommandBase {
   private final StorageSystem storageSystem;
   private double convSpeed;
   /** Creates a new activateConveyor. */
-  public ActivateConveyor(StorageSystem st, double speed) {
+  public ActivateConveyor(StorageSystem storageSystem, double speed) {
     // Use addRequirements() here to declare subsystem dependencies.
     convSpeed = speed;
-    storageSystem = st;
-    addRequirements(st);
+    this.storageSystem = storageSystem;
+    addRequirements(storageSystem);
   }
 
   // Called when the command is initially scheduled.
