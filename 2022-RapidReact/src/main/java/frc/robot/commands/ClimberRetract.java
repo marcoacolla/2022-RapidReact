@@ -31,7 +31,6 @@ public class ClimberRetract extends CommandBase {
   @Override
   public void initialize() {
     timer.reset();
-    timer.start();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
