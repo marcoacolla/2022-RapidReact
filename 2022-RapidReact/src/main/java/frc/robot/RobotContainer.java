@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobot;
-import frc.robot.commands.InvertDriver;
 import frc.robot.subsystems.DriveTrain;
 
 /**
@@ -20,13 +19,13 @@ import frc.robot.subsystems.DriveTrain;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveTrain cmd_drivetrain = new DriveTrain();
-  private final XboxController xboxController = new XboxController(1);
-  private final JoystickButton xButton = new JoystickButton(xboxController, 3);
+  private final DriveTrain driveTrain = new DriveTrain();
+  public final XboxController xboxController = new XboxController(Constants.XBOX_CONTROLLER_ID);
+  private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    cmd_drivetrain.setDefaultCommand(new DriveRobot(cmd_drivetrain, xboxController));
+    driveTrain.setDefaultCommand(new DriveRobot(driveTrain, xboxController));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -38,7 +37,8 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    xButton.whenHeld(new InvertDriver(cmd_drivetrain, xboxController));
+    xButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
+    
   }
 
   /**

@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
-  private DifferentialDrive difDrive;
+  private DifferentialDrive differentialDrive;
   
   private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.LEFT_MASTER_ID);
   private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.LEFT_SLAVE_ID);
@@ -44,10 +44,15 @@ public class DriveTrain extends SubsystemBase {
   /** Creates a new DriveTrain. */
   public DriveTrain() {
     
+    leftMaster.configFactoryDefault();
+    leftSlave.configFactoryDefault();
+    rightMaster.configFactoryDefault();
+    rightSlave.configFactoryDefault();
+
     SpeedControllerGroup mLeft = new SpeedControllerGroup(leftMaster, leftSlave);
     SpeedControllerGroup mRight = new SpeedControllerGroup(rightMaster, rightSlave);
   
-    difDrive = new DifferentialDrive(mLeft, mRight);
+    differentialDrive = new DifferentialDrive(mLeft, mRight);
 
     //leftSlave.follow(leftMaster);
     //rightSlave.follow(rightMaster);
@@ -57,7 +62,7 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void arcadeDrive(double moveSpeed, double rotateSpeed){
-    difDrive.arcadeDrive(moveSpeed, rotateSpeed);
+    differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
   }
  
   @Override
