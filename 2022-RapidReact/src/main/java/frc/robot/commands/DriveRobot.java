@@ -12,7 +12,7 @@ public class DriveRobot extends CommandBase {
   //public static boolean isInverted = false;
   private final DriveTrain mDrivetrain;
   private final XboxController xboxController;
-  public static boolean isInverted;
+  public static boolean isInverted = false;
   /** Creates a new ArcadeDriver. */
   public DriveRobot(DriveTrain driveTrain, XboxController m_xboxController) {
     // Use addRequirements() here to declare subsystem dependencies.
