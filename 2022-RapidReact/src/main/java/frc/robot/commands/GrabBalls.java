@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
 public class GrabBalls extends CommandBase {
@@ -20,7 +21,7 @@ public class GrabBalls extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    r_intake.grabBalls(0.5);
+    r_intake.grabBalls(Constants.GB_VELOCITY);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

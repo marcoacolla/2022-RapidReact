@@ -41,11 +41,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-  final JoystickButton yButton = new JoystickButton(r_xbox, 4);
-  final JoystickButton aButton = new JoystickButton(r_xbox, 1);
+  final JoystickButton yButton = new JoystickButton(r_xbox, Constants.Y_BUTTON);
+  final JoystickButton aButton = new JoystickButton(r_xbox, Constants.A_BUTTON);
 
-  yButton.whileHeld(g_balls);
-  aButton.whileHeld(i_motor);
+  yButton.whenPressed(g_balls);
+  aButton.whenPressed(i_motor);
   }
 
   /**
