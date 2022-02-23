@@ -14,6 +14,8 @@ import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriveRobot;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,9 +37,14 @@ public class RobotContainer {
 
   public static final XboxController controller = new XboxController(Constants.CONTROLLER_ID);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
+
+  private final DriveTrain driveTrain = new DriveTrain();
+  private final JoystickButton xButton = new JoystickButton(controller, XboxController.Button.kX.value);
+
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+    driveTrain.setDefaultCommand(new DriveRobot(driveTrain, controller));
   }
 
   /**
@@ -49,6 +56,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     buttonRb.whenPressed(new ClimberExtend(climber, Constants.CLIMBER_SPEED));
     buttonLb.whenPressed(new ClimberRetract(climber, Constants.CLIMBER_SPEED));
+    xButton.toggleWhenPressed(new DriveRobot(driveTrain, controller));
   }
 
   /**
