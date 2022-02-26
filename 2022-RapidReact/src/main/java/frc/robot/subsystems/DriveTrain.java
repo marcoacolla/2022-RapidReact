@@ -31,6 +31,8 @@ public class DriveTrain extends SubsystemBase {
   private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   private final ADXRS450_GyroSim gyroSim = new ADXRS450_GyroSim(gyro);
 
+  public boolean isInverted = false;
+
   private DifferentialDrivetrainSim driveSim = DifferentialDrivetrainSim.createKitbotSim(
     KitbotMotor.kDualCIMPerSide,
     KitbotGearing.k10p71,
@@ -53,9 +55,6 @@ public class DriveTrain extends SubsystemBase {
     SpeedControllerGroup mRight = new SpeedControllerGroup(rightMaster, rightSlave);
   
     differentialDrive = new DifferentialDrive(mLeft, mRight);
-
-    //leftSlave.follow(leftMaster);
-    //rightSlave.follow(rightMaster);
 
     SmartDashboard.putData("Field", field);
     odometry = new DifferentialDriveOdometry(driveSim.getHeading());

@@ -9,10 +9,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
 public class DriveRobot extends CommandBase {
-  //public static boolean isInverted = false;
   private final DriveTrain mDrivetrain;
   private final XboxController xboxController;
-  public static boolean isInverted = false;
   /** Creates a new ArcadeDriver. */
   public DriveRobot(DriveTrain driveTrain, XboxController m_xboxController) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -24,7 +22,7 @@ public class DriveRobot extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    isInverted = !isInverted;
+    mDrivetrain.isInverted = !mDrivetrain.isInverted;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,7 +31,7 @@ public class DriveRobot extends CommandBase {
     double moveSpeed = xboxController.getRawAxis(1);
     double rotateSpeed = xboxController.getRawAxis(0);
     //A inversão usa o moveSpeed sem sinal negativo porque o robô já está invertido por padrão
-    if(isInverted){
+    if(mDrivetrain.isInverted){
       mDrivetrain.arcadeDrive(moveSpeed, rotateSpeed);
     }
     else {
