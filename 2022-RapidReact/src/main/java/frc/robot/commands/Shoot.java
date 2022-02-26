@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Shooter;
 
-public class ShootWithShooter extends CommandBase {
+public class Shoot extends CommandBase {
     private final Shooter shooter;
 
     private Timer timer = new Timer();
 
-    public ShootWithShooter(Shooter shooter) {
+    public Shoot(Shooter shooter) {
         addRequirements(shooter);
         this.shooter = shooter;
     }

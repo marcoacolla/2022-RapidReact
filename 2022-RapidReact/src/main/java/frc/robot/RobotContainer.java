@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
 
-    private final XboxController m_joystick = new XboxController(0);
+    private final XboxController m_joystick = new XboxController(Constants.CONTROLLER_ID);
 
     private Shooter shooter = new Shooter();
 
@@ -22,7 +22,7 @@ public class RobotContainer {
     private void configureButtonBindings() {
         // kB = botão B do controle
         final JoystickButton kB = new JoystickButton(m_joystick, constants.BUTTON_B_ID);
-        kB.whenPressed(new ShootWithShooter(shooter));
+        kB.whenPressed(new Shoot(shooter));
     }
 
     public Command getAutonomousCommand() {
