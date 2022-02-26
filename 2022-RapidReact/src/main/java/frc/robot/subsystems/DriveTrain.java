@@ -66,8 +66,8 @@ public class DriveTrain extends SubsystemBase {
 
     differentialDrive = new DifferentialDrive(mLeft, mRight);
 
-    leftEncoder.setDistancePerPulse(Constants.DISTANCE_CONVERSION);
-    rightEncoder.setDistancePerPulse(Constants.DISTANCE_CONVERSION);
+    leftEncoder.setDistancePerPulse(Constants.CONVERT_TO_DISTANCE);
+    rightEncoder.setDistancePerPulse(Constants.CONVERT_TO_DISTANCE);
 
     //leftSlave.follow(leftMaster);
     //rightSlave.follow(rightMaster);
@@ -80,34 +80,21 @@ public class DriveTrain extends SubsystemBase {
       differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
     }
 
-    public double getAutoTurn(double destination){
-      double autoErrorPercent = ((gyro.getAngle() - destination) / destination) * 100;
-      return (Constants.KP_VALUE * autoErrorPercent);
-    }
-
     public void resetEncoders(){
       rightEncoder.reset();
       leftEncoder.reset();
     }
 
     public double getRightTrueDistance() {
-      return rightEncoder.getDistance() * Constants.DISTANCE_CONVERSION;
+      return rightEncoder.getDistance() * Constants.CONVERT_TO_DISTANCE;
     }
   
     public double getLeftTrueDistance() {
-      return leftEncoder.getDistance() * Constants.DISTANCE_CONVERSION;
+      return leftEncoder.getDistance() * Constants.CONVERT_TO_DISTANCE;
     }
   
     public double getTrueDistance() {
       return (getLeftTrueDistance() + getRightTrueDistance()) / 2;
-    }
-
-    public Encoder getLefEncoder(){
-      return leftEncoder;
-    }
-
-    public Encoder getRightEncoder(){
-      return rightEncoder;
     }
 
   @Override

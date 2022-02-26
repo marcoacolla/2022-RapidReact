@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 /** An example command that uses an example subsystem. */
 public class PIDTurnAngle extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final DriveTrain driveTrain;
+  
+private final DriveTrain driveTrain;
 
   private final double angle;
   private double positionError = 0;
@@ -22,8 +23,8 @@ public class PIDTurnAngle extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public PIDTurnAngle(DriveTrain df, double angle) {
-    driveTrain = df;
+  public PIDTurnAngle(DriveTrain dt, double angle) {
+    driveTrain = dt;
     this.angle = angle;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
@@ -32,7 +33,7 @@ public class PIDTurnAngle extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    driveTrain.resetEncoders();
+    driveTrain.gyro.reset();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,7 +42,13 @@ public class PIDTurnAngle extends CommandBase {
     positionError = ((driveTrain.gyro.getAngle() - angle) / angle) * 100;
     trueError = positionError * Constants.KP_VALUE;
   
-    driveTrain.arcadeDrive(0, trueError);
+    if(angle < 0){
+        driveTrain.arcadeDrive(0, -trueError);
+    }
+
+    if(angle > 0){
+        driveTrain.arcadeDrive(0, trueError);
+      }
   }
 
   // Called once the command ends or is interrupted.
@@ -53,6 +60,11 @@ public class PIDTurnAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return driveTrain.gyro.getAngle() > angle;
-  }
+    if(angle < 0){
+      return driveTrain.gyro.getAngle() < angle;
+     }else if(angle > 0){
+      return driveTrain.gyro.getAngle() >= angle;
+     }
+     return false;
+    }
 }

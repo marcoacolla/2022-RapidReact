@@ -22,8 +22,8 @@ public class PIDDriveStraight extends CommandBase {
    *
    * @param subsystem The subsystem used by this command.
    */
-  public PIDDriveStraight(DriveTrain df, double distance) {
-    driveTrain = df;
+  public PIDDriveStraight(DriveTrain dt, double distance) {
+    driveTrain = dt;
     this.distance = distance;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(driveTrain);
@@ -40,8 +40,14 @@ public class PIDDriveStraight extends CommandBase {
   public void execute() {
     positionError = ((driveTrain.getTrueDistance() - distance) / distance) * 100;
     trueError = positionError * Constants.KP_VALUE;
-  
+    
+    if(distance > 0){
     driveTrain.arcadeDrive(trueError, 0);
+    }
+
+    if(distance < 0){
+      driveTrain.arcadeDrive(-trueError, 0);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -53,6 +59,11 @@ public class PIDDriveStraight extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return driveTrain.getTrueDistance() > distance;
+    if(distance > 0){
+      return driveTrain.getTrueDistance() >= distance;
+    }
+    else if(distance < 0){
+      return driveTrain.getTrueDistance() <= distance;
+    }return false;
   }
 }

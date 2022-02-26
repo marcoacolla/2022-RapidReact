@@ -28,7 +28,7 @@ public static final int B_CHANNEL = 1;
 //PID
 private static final double CPR = 2048;
 private static final double WHEEL_CIRCUMFERENCE = Math.PI * 5;
-public  static final double DISTANCE_CONVERSION = WHEEL_CIRCUMFERENCE / CPR;
+public  static final double CONVERT_TO_DISTANCE = WHEEL_CIRCUMFERENCE / CPR;
 
 public static final double kTurnP = 1;
 public static final double kTurnI = 0;
