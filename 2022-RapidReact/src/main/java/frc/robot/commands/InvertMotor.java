@@ -10,12 +10,12 @@ import frc.robot.subsystems.Intake;
 
 public class InvertMotor extends CommandBase {
   /** Creates a new InvertMotor. */
-  private Intake r_intake;
+  private Intake intake;
 
   public InvertMotor(Intake param_intake) {
     // Use addRequirements() here to declare subsystem dependencies.
-  r_intake = param_intake;
-  addRequirements(r_intake);
+  intake = param_intake;
+  addRequirements(intake);
   }
 
   // Called when the command is initially scheduled.
@@ -25,13 +25,13 @@ public class InvertMotor extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    r_intake.grabBalls(-Constants.GB_VELOCITY);
+    intake.grabBalls(-Constants.GB_VELOCITY);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    r_intake.stopIntake();
+    intake.stopIntake();
   }
 
   // Returns true when the command should end.

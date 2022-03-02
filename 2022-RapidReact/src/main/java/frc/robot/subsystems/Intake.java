@@ -11,7 +11,7 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
   /** Creates a new Intake. */
 
-  VictorSP intakeMotor;
+  private VictorSP intakeMotor;
 
   public Intake() {  
   

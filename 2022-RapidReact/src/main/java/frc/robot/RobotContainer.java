@@ -21,11 +21,11 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
-  private final XboxController r_xbox = new XboxController(1);
-  private final Intake r_intake = new Intake();
+  private final XboxController xbox = new XboxController(1);
+  private final Intake intake = new Intake();
 
-  private final GrabBalls g_balls = new GrabBalls(r_intake);
-  private final InvertMotor i_motor = new InvertMotor(r_intake);
+  private final GrabBalls grabBalls = new GrabBalls(intake);
+  private final InvertMotor invMotor = new InvertMotor(intake);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -41,11 +41,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-  final JoystickButton yButton = new JoystickButton(r_xbox, Constants.Y_BUTTON);
-  final JoystickButton aButton = new JoystickButton(r_xbox, Constants.A_BUTTON);
+  final JoystickButton yButton = new JoystickButton(xbox, Constants.Y_BUTTON);
+  final JoystickButton aButton = new JoystickButton(xbox, Constants.A_BUTTON);
 
-  yButton.whenPressed(g_balls);
-  aButton.whenPressed(i_motor);
+  yButton.whenPressed(grabBalls);
+  aButton.whenPressed(invMotor);
   }
 
   /**
