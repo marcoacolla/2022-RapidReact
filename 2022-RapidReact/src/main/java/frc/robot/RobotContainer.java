@@ -8,8 +8,7 @@ import frc.robot.subsystems.Climber;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ClimberExtend;
-import frc.robot.commands.ClimberRetract;
+import frc.robot.commands.ClimberCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.DriveTrain;
@@ -47,8 +46,7 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    buttonRb.whenPressed(new ClimberExtend(climber, Constants.CLIMBER_SPEED));
-    buttonLb.whenPressed(new ClimberRetract(climber, Constants.CLIMBER_SPEED));
+    buttonRb.whenPressed(new ClimberCommand(climber, Constants.CLIMBER_SPEED));
   }
 
   /**
