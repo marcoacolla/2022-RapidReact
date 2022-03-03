@@ -4,11 +4,28 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
-public class ExampleSubsystem extends SubsystemBase {
-  /** Creates a new ExampleSubsystem. */
-  public ExampleSubsystem() {}
+
+public class Climber extends SubsystemBase {
+  
+  private final WPI_TalonSRX climberTalonSRX = new WPI_TalonSRX(Constants.CLIMBER_ID);
+
+  public Climber() {}
+
+  public void setClimberSpeed(double speed){
+    climberTalonSRX.set(speed);
+  }
+
+  public void extendClimber(double speed){
+    climberTalonSRX.set(speed);
+  }
+
+  public void retractClimber(double speed){
+    climberTalonSRX.set(-speed);
+  }
 
   @Override
   public void periodic() {
