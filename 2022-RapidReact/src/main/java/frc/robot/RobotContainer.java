@@ -12,6 +12,12 @@ import frc.robot.commands.ClimberCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.GrabBalls;
+import frc.robot.commands.InvertMotor;
+import frc.robot.subsystems.Intake;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,6 +31,12 @@ private final Climber climber = new Climber();
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
+  private final XboxController xbox = new XboxController(1);
+  private final Intake intake = new Intake();
+
+  private final GrabBalls grabBalls = new GrabBalls(intake);
+  private final InvertMotor invMotor = new InvertMotor(intake);
+  
   private final JoystickButton buttonRb = new JoystickButton(RobotContainer.controller, Constants.BUTTON_RB_ID);
   private final JoystickButton buttonLb = new JoystickButton(RobotContainer.controller, Constants.BUTTON_LB_ID);
 
@@ -46,7 +58,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+  final JoystickButton yButton = new JoystickButton(xbox, Constants.Y_BUTTON);
+  final JoystickButton aButton = new JoystickButton(xbox, Constants.A_BUTTON);
+
+  yButton.whenPressed(grabBalls);
+  aButton.whenPressed(invMotor);
+  
     buttonRb.whenPressed(new ClimberCommand(climber, Constants.CLIMBER_SPEED));
+
   }
 
   /**
@@ -56,5 +76,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+    return null;
   }
 }

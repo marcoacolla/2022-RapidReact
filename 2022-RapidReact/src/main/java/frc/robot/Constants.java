@@ -14,7 +14,12 @@ package frc.robot;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
-//Climber
+  
+public static final int INTAKE_MOTOR_ID = 1;
+public static final int Y_BUTTON = 4;
+public static final int A_BUTTON = 1;
+public static final double GB_VELOCITY = 0.5;
+  
 public static final int CLIMBER_ID= 0;
 public static final double CLIMBER_SPEED = 0.5;
 
@@ -53,7 +58,5 @@ public static final int RIGHT_MASTER_ID = 4;
 public static final int RIGHT_SLAVE_ID = 3;
 
 public static final int XBOX_CONTROLLER_ID = 1;
-
-    
 
 }
