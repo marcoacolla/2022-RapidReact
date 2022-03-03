@@ -40,7 +40,9 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final DriveTrain driveTrain = new DriveTrain();
   public final XboxController xboxController = new XboxController(Constants.XBOX_CONTROLLER_ID);
+  private final XboxController m_joystick = new XboxController(Constants.CONTROLLER_ID);
   private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
+  private Shooter shooter = new Shooter();
 
   //subsystems
   private final StorageSystem storageSystem;
@@ -89,6 +91,9 @@ public class RobotContainer {
 
   xButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
   
+  final JoystickButton kB = new JoystickButton(m_joystick, constants.BUTTON_B_ID);
+        kB.whenPressed(new Shoot(shooter));
+  
     kStart.whenPressed(activateConveyor);
     kBack.cancelWhenPressed(activateConveyor);
     
@@ -111,4 +116,5 @@ public class RobotContainer {
     // An ExampleCommand will run in autonomous
     return null;
   }
+
 }
