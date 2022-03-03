@@ -23,11 +23,16 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
   private DifferentialDrive differentialDrive;
-
   private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.LEFT_MASTER_ID);
   private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.LEFT_SLAVE_ID);
   private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.RIGHT_MASTER_ID);
   private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.RIGHT_SLAVE_ID);
+
+
+  private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
+  private final ADXRS450_GyroSim gyroSim = new ADXRS450_GyroSim(gyro);
+
+  public boolean isInverted = false;
 
   public final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   public final ADXRS450_GyroSim gyroSim = new ADXRS450_GyroSim(gyro);
@@ -41,7 +46,6 @@ public class DriveTrain extends SubsystemBase {
     Constants.A_CHANNEL,
     Constants.B_CHANNEL, 
     false);
-
 
   private DifferentialDrivetrainSim driveSim = DifferentialDrivetrainSim.createKitbotSim(
     KitbotMotor.kDualCIMPerSide,
@@ -68,6 +72,9 @@ public class DriveTrain extends SubsystemBase {
 
     leftEncoder.setDistancePerPulse(Constants.CONVERT_TO_DISTANCE);
     rightEncoder.setDistancePerPulse(Constants.CONVERT_TO_DISTANCE);
+  
+  SmartDashboard.putData("Field", field);
+    odometry = new DifferentialDriveOdometry(driveSim.getHeading());
 
     //leftSlave.follow(leftMaster);
     //rightSlave.follow(rightMaster);
@@ -97,6 +104,7 @@ public class DriveTrain extends SubsystemBase {
       return (getLeftTrueDistance() + getRightTrueDistance()) / 2;
     }
 
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
@@ -110,8 +118,8 @@ public class DriveTrain extends SubsystemBase {
       leftMaster.get() * RobotController.getInputVoltage(),
       -rightMaster.get() * RobotController.getInputVoltage()
     );
-
+    
     driveSim.update(0.02);
     gyroSim.setAngle(-driveSim.getHeading().getDegrees());
   }
-} 
+}

@@ -9,6 +9,9 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.DriveRobot;
+import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ActivateConveyor;
@@ -35,7 +38,9 @@ private final Climber climber = new Climber();
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-
+  private final DriveTrain driveTrain = new DriveTrain();
+  public final XboxController xboxController = new XboxController(Constants.XBOX_CONTROLLER_ID);
+  private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
 
   //subsystems
   private final StorageSystem storageSystem;
@@ -61,6 +66,7 @@ public class RobotContainer {
   private final JoystickButton xButton = new JoystickButton(controller, XboxController.Button.kX.value);
 
   public RobotContainer() {
+    driveTrain.setDefaultCommand(new DriveRobot(driveTrain, xboxController));
     // Configure the button bindings
     //Storage System
     storageSystem = new StorageSystem();
@@ -81,6 +87,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
+  xButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
+  
     kStart.whenPressed(activateConveyor);
     kBack.cancelWhenPressed(activateConveyor);
     
