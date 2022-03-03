@@ -8,6 +8,11 @@ import frc.robot.subsystems.Climber;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.ActivateConveyor;
+import frc.robot.subsystems.StorageSystem;
 import frc.robot.commands.ClimberCommand;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -31,6 +36,15 @@ private final Climber climber = new Climber();
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
 
+
+  //subsystems
+  private final StorageSystem storageSystem;
+    //commands
+  private final ActivateConveyor activateConveyor;
+    //buttons
+  private final JoystickButton kStart;
+  private final JoystickButton kBack;
+  
   private final XboxController xbox = new XboxController(1);
   private final Intake intake = new Intake();
 
@@ -48,6 +62,14 @@ public class RobotContainer {
 
   public RobotContainer() {
     // Configure the button bindings
+    //Storage System
+    storageSystem = new StorageSystem();
+    //commands
+    activateConveyor = new ActivateConveyor(storageSystem, 1.0);
+    //buttons
+    kStart =  new JoystickButton(controller, XboxController.Button.kStart.value);
+    kBack = new JoystickButton(controller, XboxController.Button.kBack.value);
+
     configureButtonBindings();
   }
 
@@ -59,15 +81,18 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
 
-  final JoystickButton yButton = new JoystickButton(xbox, Constants.Y_BUTTON);
+    kStart.whenPressed(activateConveyor);
+    kBack.cancelWhenPressed(activateConveyor);
+    
+    final JoystickButton yButton = new JoystickButton(xbox, Constants.Y_BUTTON);
   final JoystickButton aButton = new JoystickButton(xbox, Constants.A_BUTTON);
 
   yButton.whenPressed(grabBalls);
   aButton.whenPressed(invMotor);
   
     buttonRb.whenPressed(new ClimberCommand(climber, Constants.CLIMBER_SPEED));
-
   }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

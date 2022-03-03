@@ -14,6 +14,11 @@ package frc.robot;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+//ID do conveyor do storage
+public static final int STORAGE_CONV_ID = 0;
+//Velocidade do conveyor
+public static final double STORAGE_SPEED = 1.0;
   
 public static final int INTAKE_MOTOR_ID = 1;
 public static final int Y_BUTTON = 4;
