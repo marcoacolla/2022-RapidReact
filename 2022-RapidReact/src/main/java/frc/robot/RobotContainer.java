@@ -33,14 +33,14 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final StorageSystem storageSystem = new StorageSystem();
   private final Intake intake = new Intake();
- 
+
   private final XboxController xboxController = new XboxController(Constants.CONTROLLER_ID);
 
    //buttons
   private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
   private final JoystickButton yButton = new JoystickButton(xboxController, XboxController.Button.kY.value);
   private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
-  private final JoystickButton rightTrigger = new JoystickButton(xboxController, Constants.TRIGGER_ID);
+  private final JoystickButton rightTrigger = new JoystickButton(xboxController, XboxController.Axis.kRightTrigger.value);
   private final JoystickButton upButton = new JoystickButton(xboxController, Constants.UP_BUTTON_ID);
   private final JoystickButton downButton = new JoystickButton(xboxController, Constants.DOWN_BUTTON_ID);
 

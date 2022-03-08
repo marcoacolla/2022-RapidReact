@@ -29,19 +29,18 @@ public final class Constants {
   public static final int CLIMBER_LEFT_SLAVE_ID = 9;
   public static final int CLIMBER_RIGHT_MASTER_ID = 10;
   public static final int CLIMBER_RIGHT_SLAVE_ID = 11;
-  
+
   public static final double SHOOTER_SPEED = 0.8;
   public static final double STORAGE_SPEED = 1.0;
-  public static final double INTAKE_SPEED = 0.5;  
+  public static final double INTAKE_SPEED = 0.5;
   public static final double CLIMBER_SPEED = 0.5;
   public static final double SHOOTER_DELAY = 2;
 
   public static final int Y_BUTTON = 4;
   public static final int A_BUTTON = 1;
-  public static final int TRIGGER_ID = 5;
   public static final int UP_BUTTON_ID = 6;
   public static final int DOWN_BUTTON_ID = 7;
-  
+
   //PID Channel
   public static final int A_CHANNEL = 0;
   public static final int B_CHANNEL = 1;
