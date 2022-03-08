@@ -7,14 +7,17 @@ package frc.robot;
 import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobot;
 import frc.robot.commands.ExtendClimber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.StorageSystem;
+import frc.robot.commands.AutoIntake;
 import frc.robot.commands.ConveyorAndShoot;
 import frc.robot.commands.GrabBalls;
 import frc.robot.commands.InvertIntake;
+import frc.robot.commands.PIDDriveStraight;
 import frc.robot.commands.RetractClimber;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -36,6 +39,7 @@ public class RobotContainer {
    //buttons
   private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
   private final JoystickButton yButton = new JoystickButton(xboxController, XboxController.Button.kY.value);
+  private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
   private final JoystickButton rightTrigger = new JoystickButton(xboxController, Constants.TRIGGER_ID);
   private final JoystickButton upButton = new JoystickButton(xboxController, Constants.UP_BUTTON_ID);
   private final JoystickButton downButton = new JoystickButton(xboxController, Constants.DOWN_BUTTON_ID);
@@ -46,7 +50,7 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    //nButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
+    bButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
 
     rightTrigger.whenHeld(new GrabBalls(intake));
     yButton.whenHeld(new InvertIntake(intake));
@@ -58,6 +62,12 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return null;
+    return new SequentialCommandGroup(
+      new ConveyorAndShoot(storageSystem, shooter, Constants.STORAGE_SPEED, Constants.SHOOTER_SPEED, Constants.SHOOTER_DELAY),
+      new PIDDriveStraight(driveTrain, 1),
+      new AutoIntake(intake, 2),
+      new PIDDriveStraight(driveTrain, -1),
+      new ConveyorAndShoot(storageSystem, shooter, Constants.STORAGE_SPEED, Constants.SHOOTER_SPEED, Constants.SHOOTER_DELAY)
+    );
   }
 }
