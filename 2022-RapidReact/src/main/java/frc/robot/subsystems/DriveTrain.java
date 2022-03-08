@@ -32,16 +32,16 @@ public class DriveTrain extends SubsystemBase {
   private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   private final ADXRS450_GyroSim gyroSim = new ADXRS450_GyroSim(gyro);
 
-  public boolean isInverted = false;
+  private boolean isInverted = false;
 
   public final Encoder rightEncoder = new Encoder(
     Constants.A_CHANNEL,
-    Constants.B_CHANNEL, 
+    Constants.B_CHANNEL,
     false);
 
   public final Encoder leftEncoder = new Encoder(
     Constants.A_CHANNEL,
-    Constants.B_CHANNEL, 
+    Constants.B_CHANNEL,
     false);
 
   private DifferentialDrivetrainSim driveSim = DifferentialDrivetrainSim.createKitbotSim(
@@ -69,12 +69,12 @@ public class DriveTrain extends SubsystemBase {
 
     leftEncoder.setDistancePerPulse(Constants.CONVERT_TO_DISTANCE);
     rightEncoder.setDistancePerPulse(Constants.CONVERT_TO_DISTANCE);
-  
+
     SmartDashboard.putData("Field", field);
     odometry = new DifferentialDriveOdometry(driveSim.getHeading());
 
   }
-  
+
     public void arcadeDrive(double moveSpeed, double rotateSpeed){
       differentialDrive.arcadeDrive(moveSpeed, rotateSpeed);
     }
@@ -87,11 +87,11 @@ public class DriveTrain extends SubsystemBase {
     public double getRightTrueDistance() {
       return rightEncoder.getDistance() * Constants.CONVERT_TO_DISTANCE;
     }
-  
+
     public double getLeftTrueDistance() {
       return leftEncoder.getDistance() * Constants.CONVERT_TO_DISTANCE;
     }
-  
+
     public double getTrueDistance() {
       return (getLeftTrueDistance() + getRightTrueDistance()) / 2;
     }
@@ -110,12 +110,24 @@ public class DriveTrain extends SubsystemBase {
       leftMaster.get() * RobotController.getInputVoltage(),
       -rightMaster.get() * RobotController.getInputVoltage()
     );
-    
+
     driveSim.update(0.02);
     gyroSim.setAngle(-driveSim.getHeading().getDegrees());
   }
 
   public ADXRS450_Gyro getGyro() {
     return gyro;
+  }
+
+  public boolean isInverted() {
+	return isInverted;
+  }
+
+  public void setInverted(boolean isInverted) {
+	this.isInverted = isInverted;
+  }
+
+  public void invert() {
+	isInverted = !isInverted;
   }
 }

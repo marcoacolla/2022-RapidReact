@@ -12,7 +12,7 @@ public class DriveRobot extends CommandBase {
 
   private final DriveTrain driveTrain;
   private final XboxController xboxController;
-  
+
   public DriveRobot(DriveTrain driveTrain, XboxController xboxController) {
     this.driveTrain = driveTrain;
     this.xboxController = xboxController;
@@ -21,18 +21,18 @@ public class DriveRobot extends CommandBase {
 
   @Override
   public void initialize() {
-    driveTrain.isInverted = !driveTrain.isInverted;
+    driveTrain.invert();
   }
 
   @Override
-  public void execute() { 
-    double moveSpeed = xboxController.getRawAxis(1);
-    double rotateSpeed = xboxController.getRawAxis(0);
+  public void execute() {
+    double moveSpeed = xboxController.getRawAxis(XboxController.Axis.kLeftY.value);
+    double rotateSpeed = xboxController.getRawAxis(XboxController.Axis.kLeftX.value);
+
     //A inversão usa o moveSpeed sem sinal negativo porque o robô já está invertido por padrão
-    if(driveTrain.isInverted){
+    if(driveTrain.isInverted()){
       driveTrain.arcadeDrive(moveSpeed, rotateSpeed);
-    }
-    else {
+    } else {
       driveTrain.arcadeDrive(-moveSpeed, rotateSpeed);
     }
   }
