@@ -39,9 +39,9 @@ public class PIDDriveStraight extends CommandBase {
   public void execute() {
     positionError = ((driveTrain.getTrueDistance() - distance) / distance) * 100;
     trueError = positionError * Constants.KP_VALUE;
-    
+
     if(distance > 0){
-    driveTrain.arcadeDrive(trueError, 0);
+      driveTrain.arcadeDrive(trueError, 0);
     }
 
     if(distance < 0){
@@ -60,9 +60,10 @@ public class PIDDriveStraight extends CommandBase {
   public boolean isFinished() {
     if(distance > 0){
       return driveTrain.getTrueDistance() >= distance;
-    }
-    else if(distance < 0){
+    } else if(distance < 0){
       return driveTrain.getTrueDistance() <= distance;
-    }return false;
+    }
+
+	return false;
   }
 }
