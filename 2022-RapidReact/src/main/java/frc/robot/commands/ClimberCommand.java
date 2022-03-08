@@ -12,9 +12,10 @@ public class ClimberCommand extends CommandBase {
 
   private Climber climber;
   private double speed;
+  private double time;
   private Timer timer = new Timer();
 
-  public ClimberCommand(Climber climber, double speed) {
+  public ClimberCommand(Climber climber, double speed, double time) {
     this.climber = climber;
     this.speed = speed;
     addRequirements(climber);
@@ -28,10 +29,9 @@ public class ClimberCommand extends CommandBase {
 
   @Override
   public void execute() {
-    if(timer.get() <= 3.0){
+    if(timer.get() <= time/2){
       climber.extendClimber(speed);
-    }
-    if((timer.get() > 3.0) && (timer.get() <= 6.0)){
+    } else if((timer.get() > time/2)){
       climber.retractClimber(speed);
     }
   }
@@ -44,7 +44,7 @@ public class ClimberCommand extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return timer.get() > 6.0;
+    return timer.get() > time;
   }
 }
 
