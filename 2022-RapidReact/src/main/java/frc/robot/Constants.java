@@ -15,31 +15,59 @@ package frc.robot;
  */
 public final class Constants {
 
-  public static final int CONTROLLER_ID = 0;
 
-  public static final int RIGHT_MOTOR_SHOOTER_ID = 4;
-  public static final int LEFT_MOTOR_SHOOTER_ID = 5;
-  public static final int LEFT_MASTER_ID = 2;
-  public static final int LEFT_SLAVE_ID = 1;
-  public static final int RIGHT_MASTER_ID = 4;
-  public static final int RIGHT_SLAVE_ID = 3;
-  public static final int STORAGE_CONV_ID = 0;
-  public static final int INTAKE_MOTOR_ID = 1;
-  public static final int CLIMBER_LEFT_MASTER_ID = 8;
-  public static final int CLIMBER_LEFT_SLAVE_ID = 9;
-  public static final int CLIMBER_RIGHT_MASTER_ID = 10;
-  public static final int CLIMBER_RIGHT_SLAVE_ID = 11;
 
-  public static final double SHOOTER_SPEED = 0.8;
-  public static final double STORAGE_SPEED = 1.0;
-  public static final double INTAKE_SPEED = 0.5;
-  public static final double CLIMBER_SPEED = 0.5;
-  public static final double SHOOTER_DELAY = 2;
+    public final class Controller{
+    // controller
+      public static final int CONTROLLER_ID = 0;
+    //buttons
+      public static final int Y_BUTTON = 4;
+      public static final int A_BUTTON = 1;
+      public static final int UP_BUTTON_ID = 6;
+      public static final int DOWN_BUTTON_ID = 7;
+    }
 
-  public static final int Y_BUTTON = 4;
-  public static final int A_BUTTON = 1;
-  public static final int UP_BUTTON_ID = 6;
-  public static final int DOWN_BUTTON_ID = 7;
+    public final class Shooter{
+    // motors
+      public static final int RIGHT_MOTOR_ID = 30;
+      public static final int LEFT_MOTOR_ID = 31;
+    // speed
+      public static final double SPEED = 0.8;
+    // delay
+      public static final double DELAY = 2;
+    }
+
+    public final class DriveTrain{
+    //motors
+      public static final int LEFT_MASTER_ID = 2;
+      public static final int LEFT_SLAVE_ID = 1;
+      public static final int RIGHT_MASTER_ID = 4;
+      public static final int RIGHT_SLAVE_ID = 3;
+    }
+
+    public final class Storage{
+    // motors
+      public static final int CONV_ID = 20;
+    // speeds
+      public static final double SPEED = 1.0;
+    }
+
+    public final class Intake{
+    //motors
+      public static final int MOTOR_ID = 10;
+    // speeds
+      public static final double SPEED = 0.5;
+    }
+
+    public final class Climber{
+    //motors
+      public static final int LEFT_MASTER_ID = 8;
+      public static final int LEFT_SLAVE_ID = 9;
+      public static final int RIGHT_MASTER_ID = 10;
+      public static final int RIGHT_SLAVE_ID = 11;
+    // speeds
+      public static final double SPEED = 0.5;
+    }
 
   //PID Channel
   public static final int A_CHANNEL = 0;

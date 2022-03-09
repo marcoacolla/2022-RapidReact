@@ -29,7 +29,7 @@ public class AutoIntake extends CommandBase {
 
   @Override
   public void execute() {
-    intake.grabBalls(Constants.INTAKE_SPEED);
+    intake.grabBalls(Constants.Intake.SPEED);
   }
 
   @Override

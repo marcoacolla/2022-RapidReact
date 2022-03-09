@@ -9,8 +9,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Shooter extends SubsystemBase {
-    private final WPI_TalonSRX rightMotor = new WPI_TalonSRX(Constants.RIGHT_MOTOR_SHOOTER_ID);
-    private final WPI_TalonSRX leftMotor = new WPI_TalonSRX(Constants.LEFT_MOTOR_SHOOTER_ID);
+    private final WPI_TalonSRX rightMotor = new WPI_TalonSRX(Constants.Shooter.RIGHT_MOTOR_ID);
+    private final WPI_TalonSRX leftMotor = new WPI_TalonSRX(Constants.Shooter.LEFT_MOTOR_ID);
 
     public Shooter() {
         rightMotor.configFactoryDefault();

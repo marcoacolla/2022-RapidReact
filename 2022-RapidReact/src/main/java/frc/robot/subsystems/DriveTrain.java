@@ -23,10 +23,10 @@ import frc.robot.Constants;
 
 public class DriveTrain extends SubsystemBase {
   private DifferentialDrive differentialDrive;
-  private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.LEFT_MASTER_ID);
-  private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.LEFT_SLAVE_ID);
-  private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.RIGHT_MASTER_ID);
-  private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.RIGHT_SLAVE_ID);
+  private final WPI_TalonSRX leftMaster = new WPI_TalonSRX(Constants.DriveTrain.LEFT_MASTER_ID);
+  private final WPI_TalonSRX leftSlave = new WPI_TalonSRX(Constants.DriveTrain.LEFT_SLAVE_ID);
+  private final WPI_TalonSRX rightMaster = new WPI_TalonSRX(Constants.DriveTrain.RIGHT_MASTER_ID);
+  private final WPI_TalonSRX rightSlave = new WPI_TalonSRX(Constants.DriveTrain.RIGHT_SLAVE_ID);
 
 
   private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();

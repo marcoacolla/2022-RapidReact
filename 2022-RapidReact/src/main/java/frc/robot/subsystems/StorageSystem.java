@@ -11,7 +11,7 @@ import frc.robot.Constants;
 
 public class StorageSystem extends SubsystemBase {
   
-  private final VictorSPX storageMotor = new VictorSPX(Constants.STORAGE_CONV_ID);
+  private final VictorSPX storageMotor = new VictorSPX(Constants.Storage.CONV_ID);
 
   public StorageSystem() {}
 
@@ -22,7 +22,7 @@ public class StorageSystem extends SubsystemBase {
     storageMotor.set(ControlMode.PercentOutput, speed);
   }
 
-  public void stopStorage(){
+  public void stopStorage(){ 
     storageMotor.set(ControlMode.PercentOutput, 0.0);
   }
   

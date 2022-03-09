@@ -34,15 +34,15 @@ public class RobotContainer {
   private final StorageSystem storageSystem = new StorageSystem();
   private final Intake intake = new Intake();
 
-  private final XboxController xboxController = new XboxController(Constants.CONTROLLER_ID);
+  private final XboxController xboxController = new XboxController(Constants.Controller.CONTROLLER_ID);
 
    //buttons
   private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
   private final JoystickButton yButton = new JoystickButton(xboxController, XboxController.Button.kY.value);
   private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
   private final JoystickButton rightTrigger = new JoystickButton(xboxController, XboxController.Axis.kRightTrigger.value);
-  private final JoystickButton upButton = new JoystickButton(xboxController, Constants.UP_BUTTON_ID);
-  private final JoystickButton downButton = new JoystickButton(xboxController, Constants.DOWN_BUTTON_ID);
+  private final JoystickButton upButton = new JoystickButton(xboxController, Constants.Controller.UP_BUTTON_ID);
+  private final JoystickButton downButton = new JoystickButton(xboxController, Constants.Controller.DOWN_BUTTON_ID);
 
   public RobotContainer() {
     driveTrain.setDefaultCommand(new DriveRobot(driveTrain, xboxController));
@@ -55,19 +55,19 @@ public class RobotContainer {
     rightTrigger.whenHeld(new GrabBalls(intake));
     yButton.whenHeld(new InvertIntake(intake));
 
-    xButton.whenHeld(new ConveyorAndShoot(storageSystem, shooter, Constants.STORAGE_SPEED, Constants.SHOOTER_SPEED, Constants.SHOOTER_DELAY));
+    xButton.whenHeld(new ConveyorAndShoot(storageSystem, shooter, Constants.Storage.SPEED, Constants.Shooter.SPEED, Constants.Shooter.DELAY));
 
-    upButton.whenHeld(new ExtendClimber(climber, Constants.CLIMBER_SPEED));
-    downButton.whenHeld(new RetractClimber(climber, Constants.CLIMBER_SPEED));
+    upButton.whenHeld(new ExtendClimber(climber, Constants.Climber.SPEED));
+    downButton.whenHeld(new RetractClimber(climber, Constants.Climber.SPEED));
   }
 
   public Command getAutonomousCommand() {
     return new SequentialCommandGroup(
-      new ConveyorAndShoot(storageSystem, shooter, Constants.STORAGE_SPEED, Constants.SHOOTER_SPEED, Constants.SHOOTER_DELAY),
+      new ConveyorAndShoot(storageSystem, shooter, Constants.Storage.SPEED, Constants.Shooter.SPEED, Constants.Shooter.DELAY),
       new PIDDriveStraight(driveTrain, 1),
       new AutoIntake(intake, 2),
       new PIDDriveStraight(driveTrain, -1),
-      new ConveyorAndShoot(storageSystem, shooter, Constants.STORAGE_SPEED, Constants.SHOOTER_SPEED, Constants.SHOOTER_DELAY)
+      new ConveyorAndShoot(storageSystem, shooter, Constants.Storage.SPEED, Constants.Shooter.SPEED, Constants.Shooter.DELAY)
     );
   }
 }
