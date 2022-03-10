@@ -4,20 +4,17 @@
 
 package frc.robot;
 
-import frc.robot.subsystems.Climber;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobot;
-import frc.robot.commands.ExtendClimber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.StorageSystem;
 import frc.robot.commands.AutoIntake;
 import frc.robot.commands.ConveyorAndShoot;
 import frc.robot.commands.GrabBalls;
 import frc.robot.commands.PIDDriveStraight;
-import frc.robot.commands.RetractClimber;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -28,7 +25,6 @@ import frc.robot.subsystems.Shooter;
 public class RobotContainer {
 
   //subsystems
-  private final Climber climber = new Climber();
   private final DriveTrain driveTrain = new DriveTrain();
   private final Shooter shooter = new Shooter();
   private final StorageSystem storageSystem = new StorageSystem();
@@ -39,8 +35,6 @@ public class RobotContainer {
    //buttons
   private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
   private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
-  private final JoystickButton upButton = new JoystickButton(xboxController, Constants.Controller.UP_BUTTON_ID);
-  private final JoystickButton downButton = new JoystickButton(xboxController, Constants.Controller.DOWN_BUTTON_ID);
 
   public RobotContainer() {
     driveTrain.setDefaultCommand(new DriveRobot(driveTrain, xboxController));
@@ -53,9 +47,6 @@ public class RobotContainer {
     bButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
 
 	xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
-
-    upButton.whenHeld(new ExtendClimber(climber, Constants.Climber.SPEED));
-    downButton.whenHeld(new RetractClimber(climber, Constants.Climber.SPEED));
   }
 
   public Command getAutonomousCommand() {
