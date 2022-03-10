@@ -32,7 +32,7 @@ public class DriveTrain extends SubsystemBase {
   private final ADXRS450_Gyro gyro = new ADXRS450_Gyro();
   private final ADXRS450_GyroSim gyroSim = new ADXRS450_GyroSim(gyro);
 
-  private boolean isInverted = false;
+  private boolean isInverted = true;
 
   public final Encoder rightEncoder = new Encoder(
     Constants.A_CHANNEL,
