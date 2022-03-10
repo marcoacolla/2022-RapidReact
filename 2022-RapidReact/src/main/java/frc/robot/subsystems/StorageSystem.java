@@ -10,20 +10,20 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class StorageSystem extends SubsystemBase {
-  
-  private final VictorSPX storageMotor = new VictorSPX(Constants.Storage.CONV_ID);
+
+  private final VictorSPX motor = new VictorSPX(Constants.Storage.CONV_ID);
 
   public StorageSystem() {}
 
   @Override
   public void periodic() {}
 
-  public void activateStorage(double speed){ 
-    storageMotor.set(ControlMode.PercentOutput, speed);
+  public void activate(double speed){
+    motor.set(ControlMode.PercentOutput, speed);
   }
 
-  public void stopStorage(){ 
-    storageMotor.set(ControlMode.PercentOutput, 0.0);
+  public void stop(){
+    motor.set(ControlMode.PercentOutput, 0.0);
   }
-  
+
 }

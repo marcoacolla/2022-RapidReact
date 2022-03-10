@@ -4,22 +4,29 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.StorageSystem;
 
-public class ActivateConveyor extends CommandBase {
+public class TimedConveyor extends CommandBase {
 
   private final StorageSystem storageSystem;
+  private final Timer timer = new Timer();
   private double speed;
+  private double time;
 
-  public ActivateConveyor(StorageSystem storageSystem, double speed) {
+  public TimedConveyor(StorageSystem storageSystem, double speed, double time) {
     this.speed = speed;
+	this.time = time;
     this.storageSystem = storageSystem;
     addRequirements(storageSystem);
   }
 
   @Override
-  public void initialize() {}
+  public void initialize() {
+	timer.reset();
+	timer.start();
+  }
 
   @Override
   public void execute() {
@@ -33,6 +40,6 @@ public class ActivateConveyor extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return timer.get() >= time;
   }
 }
