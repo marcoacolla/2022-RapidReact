@@ -62,10 +62,10 @@ public final class Constants {
 
     public final class Climber{
     //motors
-      public static final int LEFT_MASTER_ID = 8;
-      public static final int LEFT_SLAVE_ID = 9;
-      public static final int RIGHT_MASTER_ID = 10;
-      public static final int RIGHT_SLAVE_ID = 11;
+      public static final int UP_MASTER_ID = 8;
+      public static final int UP_SLAVE_ID = 9;
+      public static final int DOWN_MASTER_ID = 10;
+      public static final int DOWN_SLAVE_ID = 11;
     // speeds
       public static final double SPEED = 0.5;
     }

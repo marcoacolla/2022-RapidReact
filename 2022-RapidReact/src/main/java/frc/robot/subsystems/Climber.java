@@ -11,15 +11,15 @@ import frc.robot.Constants;
 
 
 public class Climber extends SubsystemBase {
-  
-  private final VictorSP upMaster = new VictorSP(Constants.Climber.LEFT_MASTER_ID);
-  private final VictorSP downMaster = new VictorSP(Constants.Climber.RIGHT_MASTER_ID);
-  private final VictorSP upSlave = new VictorSP(Constants.Climber.LEFT_SLAVE_ID);
-  private final VictorSP downSlave = new VictorSP(Constants.Climber.RIGHT_SLAVE_ID);
-    
+
+  private final VictorSP upMaster = new VictorSP(Constants.Climber.UP_MASTER_ID);
+  private final VictorSP downMaster = new VictorSP(Constants.Climber.DOWN_MASTER_ID);
+  private final VictorSP upSlave = new VictorSP(Constants.Climber.UP_SLAVE_ID);
+  private final VictorSP downSlave = new VictorSP(Constants.Climber.DOWN_SLAVE_ID);
+
   private final SpeedControllerGroup upGroup = new SpeedControllerGroup(upMaster, upSlave);
   private final SpeedControllerGroup downGroup = new SpeedControllerGroup(downMaster, downSlave);
-  
+
   public Climber() {
   }
 
