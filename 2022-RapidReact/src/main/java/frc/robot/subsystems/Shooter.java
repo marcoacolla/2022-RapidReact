@@ -18,12 +18,12 @@ public class Shooter extends SubsystemBase {
         leftMotor.setInverted(true);
     }
 
-    public void turnOnShooter(double speed) {
+    public void activate(double speed) {
         rightMotor.set(speed);
         leftMotor.set(speed);
     }
 
-    public void turnOffShooter() {
+    public void stop() {
         rightMotor.set(0);
         leftMotor.set(0);
     }

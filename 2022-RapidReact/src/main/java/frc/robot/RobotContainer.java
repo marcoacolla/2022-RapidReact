@@ -18,6 +18,7 @@ import frc.robot.commands.ConveyorAndShoot;
 import frc.robot.commands.GrabBalls;
 import frc.robot.commands.PIDDriveStraight;
 import frc.robot.commands.RetractClimber;
+import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
@@ -51,7 +52,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     bButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
 
-    xButton.whenHeld(new ConveyorAndShoot(storageSystem, shooter, Constants.Storage.SPEED, Constants.Shooter.SPEED, Constants.Shooter.DELAY));
+	xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
 
     upButton.whenHeld(new ExtendClimber(climber, Constants.Climber.SPEED));
     downButton.whenHeld(new RetractClimber(climber, Constants.Climber.SPEED));

@@ -24,12 +24,12 @@ public class Shoot extends CommandBase {
 
     @Override
     public void execute() {
-        shooter.turnOnShooter(speed);
+        shooter.activate(speed);
     }
 
     @Override
     public void end(boolean interrupted) {
-        shooter.turnOffShooter();
+        shooter.stop();
     }
 
     @Override
