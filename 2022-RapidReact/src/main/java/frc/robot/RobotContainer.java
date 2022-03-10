@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobot;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.StorageSystem;
+import frc.robot.commands.ActivateConveyor;
 import frc.robot.commands.AutoIntake;
 import frc.robot.commands.ConveyorAndShoot;
 import frc.robot.commands.GrabBalls;
@@ -34,6 +35,7 @@ public class RobotContainer {
 
    //buttons
   private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
+  private final JoystickButton aButton = new JoystickButton(xboxController, XboxController.Button.kA.value);
   private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
 
   public RobotContainer() {
@@ -45,8 +47,9 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     bButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
-
 	xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
+
+	aButton.whenHeld(new ActivateConveyor(storageSystem, Constants.Storage.SPEED));
   }
 
   public Command getAutonomousCommand() {

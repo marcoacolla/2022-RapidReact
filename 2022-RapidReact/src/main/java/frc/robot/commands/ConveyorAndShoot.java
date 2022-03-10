@@ -17,7 +17,7 @@ public class ConveyorAndShoot extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new ActivateConveyor(storageSystem, convSpeed, time),
+      new TimedConveyor(storageSystem, convSpeed, time),
       new Shoot(shooter, shooterSpeed)
     );
   }
