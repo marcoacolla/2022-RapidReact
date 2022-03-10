@@ -22,7 +22,7 @@ public class GrabBalls extends CommandBase {
 
   @Override
   public void execute() {
-    intake.grabBalls(Constants.INTAKE_SPEED);
+    intake.grabBalls(Constants.Intake.SPEED);
   }
 
   @Override

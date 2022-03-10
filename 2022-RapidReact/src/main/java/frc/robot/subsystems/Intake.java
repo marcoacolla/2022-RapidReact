@@ -14,7 +14,7 @@ public class Intake extends SubsystemBase {
   private VictorSPX intakeMotor;
 
   public Intake() {  
-    intakeMotor = new VictorSPX(Constants.INTAKE_MOTOR_ID);
+    intakeMotor = new VictorSPX(Constants.Intake.MOTOR_ID);
   }
 
   public void periodic() {}
