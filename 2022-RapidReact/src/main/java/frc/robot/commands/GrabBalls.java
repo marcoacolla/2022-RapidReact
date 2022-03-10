@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
@@ -11,9 +12,11 @@ import frc.robot.subsystems.Intake;
 public class GrabBalls extends CommandBase {
 
   private final Intake intake;
+  private XboxController xboxController;
 
-  public GrabBalls(Intake intake) {
+  public GrabBalls(Intake intake, XboxController xboxController) {
     this.intake = intake;
+	this.xboxController = xboxController;
     addRequirements(intake);
   }
 
@@ -22,12 +25,21 @@ public class GrabBalls extends CommandBase {
 
   @Override
   public void execute() {
-    intake.grabBalls(Constants.Intake.SPEED);
+	double rightTrigger = xboxController.getRawAxis(XboxController.Axis.kRightTrigger.value);
+	double leftTrigger = xboxController.getRawAxis(XboxController.Axis.kLeftTrigger.value);
+
+	if (rightTrigger > Constants.Intake.DEADBAND) {
+	  intake.grabBalls(rightTrigger * Constants.Intake.MAX_SPEED);
+	} else if (leftTrigger > Constants.Intake.DEADBAND) {
+	  intake.grabBalls(rightTrigger * Constants.Intake.MAX_SPEED);
+	} else {
+	  intake.stop();
+	}
   }
 
   @Override
   public void end(boolean interrupted) {
-    intake.stopIntake();
+    intake.stop();
   }
 
   @Override

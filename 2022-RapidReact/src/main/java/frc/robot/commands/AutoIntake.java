@@ -29,12 +29,12 @@ public class AutoIntake extends CommandBase {
 
   @Override
   public void execute() {
-    intake.grabBalls(Constants.Intake.SPEED);
+    intake.grabBalls(Constants.Intake.MAX_SPEED);
   }
 
   @Override
   public void end(boolean interrupted) {
-    intake.stopIntake();
+    intake.stop();
   }
 
   @Override

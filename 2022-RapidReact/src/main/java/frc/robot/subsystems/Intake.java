@@ -11,19 +11,19 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
 
-  private VictorSPX intakeMotor;
+  private VictorSPX motor;
 
-  public Intake() {  
-    intakeMotor = new VictorSPX(Constants.Intake.MOTOR_ID);
+  public Intake() {
+    motor = new VictorSPX(Constants.Intake.MOTOR_ID);
   }
 
   public void periodic() {}
 
   public void grabBalls(double speed) {
-    intakeMotor.set(ControlMode.PercentOutput, speed);
+    motor.set(ControlMode.PercentOutput, speed);
   }
 
-  public void stopIntake() {
-    intakeMotor.set(ControlMode.PercentOutput, 0);
+  public void stop() {
+    motor.set(ControlMode.PercentOutput, 0);
   }
 }

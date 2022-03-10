@@ -16,7 +16,6 @@ import frc.robot.subsystems.StorageSystem;
 import frc.robot.commands.AutoIntake;
 import frc.robot.commands.ConveyorAndShoot;
 import frc.robot.commands.GrabBalls;
-import frc.robot.commands.InvertIntake;
 import frc.robot.commands.PIDDriveStraight;
 import frc.robot.commands.RetractClimber;
 import frc.robot.subsystems.Intake;
@@ -38,22 +37,19 @@ public class RobotContainer {
 
    //buttons
   private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
-  private final JoystickButton yButton = new JoystickButton(xboxController, XboxController.Button.kY.value);
   private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
-  private final JoystickButton rightTrigger = new JoystickButton(xboxController, XboxController.Axis.kRightTrigger.value);
   private final JoystickButton upButton = new JoystickButton(xboxController, Constants.Controller.UP_BUTTON_ID);
   private final JoystickButton downButton = new JoystickButton(xboxController, Constants.Controller.DOWN_BUTTON_ID);
 
   public RobotContainer() {
     driveTrain.setDefaultCommand(new DriveRobot(driveTrain, xboxController));
+	intake.setDefaultCommand(new GrabBalls(intake, xboxController));
+
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
     bButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
-
-    rightTrigger.whenHeld(new GrabBalls(intake));
-    yButton.whenHeld(new InvertIntake(intake));
 
     xButton.whenHeld(new ConveyorAndShoot(storageSystem, shooter, Constants.Storage.SPEED, Constants.Shooter.SPEED, Constants.Shooter.DELAY));
 

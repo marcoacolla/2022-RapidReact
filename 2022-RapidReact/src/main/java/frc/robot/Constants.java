@@ -56,7 +56,8 @@ public final class Constants {
     //motors
       public static final int MOTOR_ID = 10;
     // speeds
-      public static final double SPEED = 0.5;
+      public static final double MAX_SPEED = 0.7;
+      public static final double DEADBAND = 0.3;
     }
 
     public final class Climber{
