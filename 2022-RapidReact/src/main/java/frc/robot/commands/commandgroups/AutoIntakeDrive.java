@@ -4,23 +4,21 @@
 
 package frc.robot.commands.commandgroups;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import frc.robot.commands.ActivateConveyor;
-import frc.robot.commands.GrabBalls;
+import frc.robot.commands.auto.AutoIntake;
+import frc.robot.commands.auto.DriveStraight;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.StorageSystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class IntakeAndConveyor extends ParallelCommandGroup {
+public class AutoIntakeDrive extends ParallelCommandGroup {
 
   /** Creates a new Inwtaker. */
-  public IntakeAndConveyor(Intake intake, StorageSystem storageSystem, XboxController xboxController){
+  public AutoIntakeDrive(Intake intake, frc.robot.subsystems.DriveTrain driveTrain, double speed, double time){
     addCommands(
-      new GrabBalls(intake, xboxController.getRawAxis(3)),
-      new ActivateConveyor(storageSystem, xboxController.getRawAxis(3))
+      new AutoIntake(intake, time),
+      new DriveStraight(driveTrain, speed, time) 
     );
   }
 }

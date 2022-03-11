@@ -49,13 +49,13 @@ public final class Constants {
     // motors
       public static final int CONV_ID = 20;
     // speeds
-      public static final double SPEED = -1.0;
+      public static final double SPEED = -0.8;
     }
 
     public final class Intake{
     //motors
       public static final int MOTOR_ID = 10;
-    // speeds
+    // speed
       public static final double MAX_SPEED = -0.7;
       public static final double DEADBAND = 0.3;
     }

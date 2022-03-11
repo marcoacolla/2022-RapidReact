@@ -4,7 +4,6 @@
 
 package frc.robot.commands.auto;
 
-import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Intake;
@@ -42,9 +41,9 @@ public class DriveStraight extends CommandBase {
   @Override
   public void execute() {
     driveTrain.arcadeDrive(speed, 0);
-    if (speed > 0){ 
-   intake.grabBalls(Constants.Intake.MAX_SPEED);
-    }
+  //   if (speed > 0){ 
+  //  intake.grabBalls(Constants.Intake.MAX_SPEED);
+  //   }
   }
 
   // Called once the command ends or is interrupted.

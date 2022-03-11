@@ -13,7 +13,9 @@ public class StorageSystem extends SubsystemBase {
 
   private final VictorSPX motor = new VictorSPX(Constants.Storage.CONV_ID);
 
-  public StorageSystem() {}
+  public StorageSystem() {
+    motor.setInverted(true);
+  }
 
   @Override
   public void periodic() {}

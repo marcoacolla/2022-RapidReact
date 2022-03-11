@@ -48,10 +48,10 @@ public class RobotContainer {
     bButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
     //yButton.toggleWhenPressed(new IntakeAndConveyor(intake, storageSystem));
 	  xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
-    aButton.whenHeld(new IntakeAndConveyor(intake, storageSystem));
+    aButton.whenHeld(new IntakeAndConveyor(intake, storageSystem, xboxController));
   }
 
   public ParallelCommandGroup getAutonomousCommand() {
-    return new AutoRoutine(storageSystem, shooter, driveTrain, intake, 10);
+    return new AutoRoutine(storageSystem, shooter, driveTrain, intake, 15);
   }
 }
