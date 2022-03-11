@@ -5,28 +5,17 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobot;
-import frc.robot.commands.auto.DriveStraight;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.StorageSystem;
-import frc.robot.commands.commandgroups.AutoSchedule;
-import frc.robot.commands.commandgroups.ConveyorAndShoot;
-import frc.robot.commands.ActivateConveyor;
-import frc.robot.commands.auto.AutoConveyor;
-import frc.robot.commands.auto.AutoIntake;
-import frc.robot.commands.auto.AutoShoot;
+import frc.robot.commands.commandgroups.AutoRoutine;
+import frc.robot.commands.commandgroups.IntakeAndConveyor;
 import frc.robot.commands.GrabBalls;
-import frc.robot.commands.auto.PIDDriveStraight;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
-
-
-
 
 public class RobotContainer {
 
@@ -42,12 +31,14 @@ public class RobotContainer {
   private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
   private final JoystickButton aButton = new JoystickButton(xboxController, XboxController.Button.kA.value);
   private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
+  private final JoystickButton yButton = new JoystickButton(xboxController, XboxController.Button.kY.value);
+  
 
   public RobotContainer() {
     driveTrain.setInverted(true);
-    shooter.setDefaultCommand(new Shoot(shooter, Constants.Shooter.SPEED));
     driveTrain.setDefaultCommand(new DriveRobot(driveTrain, xboxController));
-	  intake.setDefaultCommand(new GrabBalls(intake, xboxController));
+    
+    intake.setDefaultCommand(new GrabBalls(intake, Constants.Intake.MAX_SPEED));
 
     configureButtonBindings();
   }
@@ -55,16 +46,12 @@ public class RobotContainer {
   private void configureButtonBindings() {
     
     bButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
+    //yButton.toggleWhenPressed(new IntakeAndConveyor(intake, storageSystem));
 	  xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
-
-	  aButton.whenHeld(new ActivateConveyor(storageSystem, Constants.Storage.SPEED));
+    aButton.whenHeld(new IntakeAndConveyor(intake, storageSystem));
   }
 
-  public Command getAutonomousCommand() {
-    return new ParallelCommandGroup(
-      new AutoShoot(shooter, Constants.Shooter.SPEED, 15),
-      new AutoSchedule(storageSystem, shooter, driveTrain, intake)
-    );
-
+  public ParallelCommandGroup getAutonomousCommand() {
+    return new AutoRoutine(storageSystem, shooter, driveTrain, intake, 10);
   }
 }

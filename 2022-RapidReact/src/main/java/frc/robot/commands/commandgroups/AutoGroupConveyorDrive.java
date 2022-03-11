@@ -5,23 +5,25 @@
 package frc.robot.commands.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.Shoot;
+import frc.robot.Constants;
 import frc.robot.commands.auto.AutoConveyor;
-import frc.robot.commands.auto.AutoShoot;
+import frc.robot.commands.auto.DriveStraight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.StorageSystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class ConveyorAndShoot extends SequentialCommandGroup {
-  /** Creates a new ConveyorAndShooter. */
-  public ConveyorAndShoot(StorageSystem storageSystem, Shooter shooter, double convSpeed, double shooterSpeed, double time) {
+public class AutoGroupConveyorDrive extends SequentialCommandGroup {
+  /** Creates a new AutoGroupConveyorDriveer. */
+  public AutoGroupConveyorDrive(StorageSystem storageSystem, Shooter shooter, frc.robot.subsystems.DriveTrain driveTrain) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoConveyor(storageSystem, convSpeed, time),
-      new AutoShoot(shooter, shooterSpeed, time - 1)
+      new AutoConveyor(storageSystem, Constants.Storage.SPEED, 4),
+      new DriveStraight(driveTrain, 0.6, 2.0),
+      new DriveStraight(driveTrain, -0.6, 2.0),
+      new AutoConveyor(storageSystem, Constants.Storage.SPEED,4)
     );
   }
 }

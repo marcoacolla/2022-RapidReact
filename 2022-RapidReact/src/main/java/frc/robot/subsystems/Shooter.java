@@ -15,7 +15,7 @@ public class Shooter extends SubsystemBase {
     public Shooter() {
         rightMotor.configFactoryDefault();
         leftMotor.configFactoryDefault();
-        leftMotor.setInverted(true);
+        rightMotor.setInverted(true);
     }
 
     public void activate(double speed) {

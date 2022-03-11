@@ -12,10 +12,10 @@ import frc.robot.Constants;
 public class Intake extends SubsystemBase {
 
   private VictorSPX motor;
-  private boolean isInverted = true;
 
   public Intake() {
     motor = new VictorSPX(Constants.Intake.MOTOR_ID);
+    motor.setInverted(false);
   }
 
   public void periodic() {}
@@ -26,17 +26,5 @@ public class Intake extends SubsystemBase {
 
   public void stop() {
     motor.set(ControlMode.PercentOutput, 0);
-  }
-
-  public boolean isInverted() {
-    return isInverted;
-  }
-  
-  public void setInverted(boolean isInverted) {
-    this.isInverted = isInverted;
-  }
-  
-  public void invert() {
-    isInverted = !isInverted;
   }
 }

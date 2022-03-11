@@ -4,32 +4,27 @@
 
 package frc.robot.commands.commandgroups;
 
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.Constants;
-import frc.robot.Constants.DriveTrain;
-import frc.robot.Constants.Intake;
-import frc.robot.commands.Shoot;
-import frc.robot.commands.auto.AutoConveyor;
 import frc.robot.commands.auto.AutoIntake;
-import frc.robot.commands.auto.DriveStraight;
+import frc.robot.commands.auto.AutoShoot;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.StorageSystem;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
-public class AutoSchedule extends SequentialCommandGroup {
-  /** Creates a new AutoScheduleer. */
-  public AutoSchedule(StorageSystem storageSystem, Shooter shooter, DriveTrain driveTrain, 
-      Intake intake) {
+public class AutoRoutine extends ParallelCommandGroup {
+  /** Creates a new AutoRoutineShooter. */
+  public AutoRoutine(StorageSystem storageSystem, Shooter shooter, frc.robot.subsystems.DriveTrain driveTrain, Intake intake, double time) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoConveyor(storageSystem, Constants.Storage.SPEED, 2),
-      new DriveStraight(driveTrain, 0.6, 2.0),
-      new AutoIntake(intake, 1.5),
-      new DriveStraight(driveTrain, -0.6, 2.0),
-      new AutoConveyor(storageSystem, Constants.Storage.SPEED,2)
+      new AutoGroupConveyorDrive(storageSystem, shooter, driveTrain),
+      new AutoShoot(shooter, -Constants.Shooter.SPEED, time),
+      new AutoIntake(intake, time)
     );
   }
+
 }

@@ -7,11 +7,13 @@ package frc.robot.commands.auto;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.Timer;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class DriveStraight extends CommandBase {
   @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
   private final DriveTrain driveTrain;
+  private final Intake intake = new Intake();
   private final Timer timer = new Timer();
   private final double time;
   private double speed;
@@ -40,12 +42,16 @@ public class DriveStraight extends CommandBase {
   @Override
   public void execute() {
     driveTrain.arcadeDrive(speed, 0);
+    if (speed > 0){ 
+   intake.grabBalls(Constants.Intake.MAX_SPEED);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
     driveTrain.arcadeDrive(0, 0);
+    intake.grabBalls(0);
     timer.stop();
   }
 

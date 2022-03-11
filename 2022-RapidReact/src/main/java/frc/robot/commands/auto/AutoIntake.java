@@ -12,6 +12,7 @@ import frc.robot.subsystems.Intake;
 public class AutoIntake extends CommandBase {
 
   private final Intake intake;
+  private DriveStraight driveStraight;
   private final Timer timer = new Timer();
   private final double time;
 
@@ -21,6 +22,8 @@ public class AutoIntake extends CommandBase {
     addRequirements(intake);
   }
 
+
+
   @Override
   public void initialize() {
     timer.reset();
@@ -29,7 +32,11 @@ public class AutoIntake extends CommandBase {
 
   @Override
   public void execute() {
-    intake.grabBalls(Constants.Intake.MAX_SPEED);
+    if(driveStraight != null){
+      intake.grabBalls(Constants.Intake.MAX_SPEED);
+    }else{
+      intake.stop();
+    }
   }
 
   @Override

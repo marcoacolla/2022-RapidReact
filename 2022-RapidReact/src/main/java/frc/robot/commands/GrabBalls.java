@@ -4,45 +4,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.subsystems.Intake;
 
 public class GrabBalls extends CommandBase {
 
   private final Intake intake;
-  private XboxController xboxController;
+  private double speed;
 
-  public GrabBalls(Intake intake, XboxController xboxController) {
+  public GrabBalls(Intake intake, double speed) {
     this.intake = intake;
-	  this.xboxController = xboxController;
+	  this.speed = speed;
     addRequirements(intake);
   }
 
   @Override
   public void initialize() {
-    intake.invert();
   }
 
   @Override
   public void execute() {
-	double rightTrigger = xboxController.getRawAxis(XboxController.Axis.kRightTrigger.value);
-	double leftTrigger = xboxController.getRawAxis(XboxController.Axis.kLeftTrigger.value);
-
-	// if (rightTrigger > Constants.Intake.DEADBAND) {
-	//   intake.grabBalls(rightTrigger * Constants.Intake.MAX_SPEED);
-	// } else if (leftTrigger > Constants.Intake.DEADBAND) {
-	//   intake.grabBalls(leftTrigger * Constants.Intake.MAX_SPEED);
-	// } else {
-	//   intake.stop();
-	// }
-  // }
-
-  if(intake.isInverted()){
-    intake.grabBalls(xboxController.getRawAxis(XboxController.Axis.kLeftTrigger.value)* -0.8);
-  }else{
-    intake.grabBalls(xboxController.getRawAxis(XboxController.Axis.kRightTrigger.value)* 0.8);}
+    intake.grabBalls(speed);
   }
 
   @Override

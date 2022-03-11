@@ -26,8 +26,16 @@ public class DriveRobot extends CommandBase {
 
   @Override
   public void execute() {
-    double moveSpeed = xboxController.getRawAxis(XboxController.Axis.kLeftY.value);
-    double rotateSpeed = xboxController.getRawAxis(XboxController.Axis.kLeftX.value);
+    double moveLeft = xboxController.getRawAxis(XboxController.Axis.kLeftY.value);
+    double turnLeft = xboxController.getRawAxis(XboxController.Axis.kLeftX.value);
+    double moveRight = xboxController.getRawAxis(XboxController.Axis.kRightY.value);
+    double turnRight = xboxController.getRawAxis(XboxController.Axis.kRightX.value);
+
+    double moveSpeed = Math.abs(moveLeft) > Math.abs(moveRight) ? moveLeft : moveRight;
+    double rotateSpeed = Math.abs(turnLeft) > Math.abs(turnRight) ? turnLeft : turnRight;
+
+    moveSpeed*=0.7;
+    rotateSpeed*=0.7;
 
     //A inversão usa o moveSpeed sem sinal negativo porque o robô já está invertido por padrão
     if(driveTrain.isInverted()){
