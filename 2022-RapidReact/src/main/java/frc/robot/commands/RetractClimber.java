@@ -24,13 +24,14 @@ public class RetractClimber extends CommandBase {
 
   @Override
   public void execute() {
-    climber.retractClimber(speed);
+    climber.downClimber(speed);
   }
 
 
   @Override
   public void end(boolean interrupted) {
-    climber.setClimberSpeed(0);
+    climber.upClimber(0);
+    climber.downClimber(0);
   }
 
   @Override

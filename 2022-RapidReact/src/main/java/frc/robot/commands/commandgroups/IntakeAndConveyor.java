@@ -23,5 +23,11 @@ public class IntakeAndConveyor extends ParallelCommandGroup {
       new ActivateConveyor(storageSystem, Constants.Storage.SPEED)
     );
   }
+  public IntakeAndConveyor(Intake intake, StorageSystem storageSystem, Boolean isInverted){
+    addCommands(
+      new GrabBalls(intake, -Constants.Intake.MAX_SPEED),
+      new ActivateConveyor(storageSystem, -Constants.Storage.SPEED)
+    );
+  }
 }
 

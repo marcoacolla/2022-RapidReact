@@ -30,15 +30,16 @@ public class ClimberCommand extends CommandBase {
   @Override
   public void execute() {
     if(timer.get() <= time/2){
-      climber.extendClimber(speed);
+      climber.upClimber(speed);
     } else if((timer.get() > time/2)){
-      climber.retractClimber(speed);
+      climber.downClimber(speed);
     }
   }
 
   @Override
   public void end(boolean interrupted) {
-    climber.setClimberSpeed(0);
+    climber.upClimber(0);
+    climber.downClimber(0);
     timer.stop();
   }
 

@@ -8,11 +8,14 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.DriveRobot;
+import frc.robot.commands.ExtendClimber;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.StorageSystem;
 import frc.robot.commands.commandgroups.AutoRoutine;
 import frc.robot.commands.commandgroups.IntakeAndConveyor;
 import frc.robot.commands.GrabBalls;
+import frc.robot.commands.RetractClimber;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
@@ -24,6 +27,7 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final StorageSystem storageSystem = new StorageSystem();
   private final frc.robot.subsystems.Intake intake = new Intake();
+  private final Climber climber = new Climber();
 
   private final XboxController xboxController = new XboxController(Constants.Controller.CONTROLLER_ID);
 
@@ -32,6 +36,10 @@ public class RobotContainer {
   private final JoystickButton aButton = new JoystickButton(xboxController, XboxController.Button.kA.value);
   private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
   private final JoystickButton yButton = new JoystickButton(xboxController, XboxController.Button.kY.value);
+  private final JoystickButton leftBumper = new JoystickButton(xboxController, XboxController.Button.kBumperLeft.value);
+  private final JoystickButton rightBumper = new JoystickButton(xboxController, XboxController.Button.kBumperRight.value);
+
+ 
   
 
   public RobotContainer() {
@@ -49,6 +57,10 @@ public class RobotContainer {
     //yButton.toggleWhenPressed(new IntakeAndConveyor(intake, storageSystem));
 	  xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
     aButton.whenHeld(new IntakeAndConveyor(intake, storageSystem));
+    yButton.whenHeld(new IntakeAndConveyor(intake, storageSystem, true));
+    leftBumper.whenHeld(new ExtendClimber(climber, Constants.Climber.SPEED));
+    rightBumper.whenHeld(new RetractClimber(climber, Constants.Climber.SPEED));
+
   }
 
   public ParallelCommandGroup getAutonomousCommand() {

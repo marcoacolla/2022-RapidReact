@@ -24,13 +24,14 @@ public class ExtendClimber extends CommandBase {
 
   @Override
   public void execute() {
-    climber.extendClimber(speed);
+      climber.upClimber(speed);
   }
 
 
   @Override
   public void end(boolean interrupted) {
-    climber.setClimberSpeed(0);
+    climber.upClimber(0);
+    climber.downClimber(0);
   }
 
   @Override
