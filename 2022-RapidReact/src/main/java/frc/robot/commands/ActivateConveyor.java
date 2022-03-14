@@ -20,6 +20,7 @@ public class ActivateConveyor extends CommandBase {
 
   @Override
   public void initialize() {
+  
   }
 
   @Override

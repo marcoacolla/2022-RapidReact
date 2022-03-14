@@ -4,6 +4,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 
@@ -12,10 +13,15 @@ public class GrabBalls extends CommandBase {
   private final Intake intake;
   private double speed;
 
+
+ 
+
   public GrabBalls(Intake intake, double speed) {
+  // this.xboxController = xboxController;
     this.intake = intake;
-	  this.speed = speed;
+    this.speed = speed;
     addRequirements(intake);
+   
   }
 
   @Override
@@ -24,7 +30,7 @@ public class GrabBalls extends CommandBase {
 
   @Override
   public void execute() {
-    intake.grabBalls(speed);
+      intake.grabBalls(speed);
   }
 
   @Override

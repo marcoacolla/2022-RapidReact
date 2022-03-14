@@ -22,8 +22,8 @@ public class AutoNoShooter extends SequentialCommandGroup {
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
       new AutoConveyor(storageSystem, Constants.Storage.SPEED, 4),
-      new AutoIntakeDrive(intake, driveTrain, 0.6, 2),
-      new DriveStraight(driveTrain,-0.6, 2),
+      new AutoIntakeDrive(intake, driveTrain, 0.6, 3),
+      new DriveStraight(driveTrain,-0.6, 3),
       new AutoConveyor(storageSystem, Constants.Storage.SPEED, 4)
     );
   }
