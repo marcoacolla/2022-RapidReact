@@ -16,10 +16,12 @@ import frc.robot.subsystems.StorageSystem;
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class IntakeAndConveyor extends ParallelCommandGroup {
 
+  
+
   /** Creates a new Inwtaker. */
   public IntakeAndConveyor(Intake intake, StorageSystem storageSystem, XboxController xboxController){
     addCommands(
-      //new GrabBalls(intake, );
+      new GrabBalls(intake, xboxController),
       new ActivateConveyor(storageSystem, -0.6)
     );
   }
