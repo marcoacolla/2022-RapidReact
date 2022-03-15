@@ -4,9 +4,7 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ActivateConveyor;
 import frc.robot.commands.DriveRobot;
 import frc.robot.subsystems.DriveTrain;
@@ -20,42 +18,28 @@ import frc.robot.subsystems.Shooter;
 
 public class RobotContainer {
 
-  private double speed;
-
   //subsystems
   private final frc.robot.subsystems.DriveTrain driveTrain = new DriveTrain();
   private final Shooter shooter = new Shooter();
   private final StorageSystem storageSystem = new StorageSystem();
   private final frc.robot.subsystems.Intake intake = new Intake();
-
-  private final XboxController xboxController = new XboxController(Constants.Controller.CONTROLLER_ID);
-
-   //buttons
-  private final JoystickButton xButton = new JoystickButton(xboxController, XboxController.Button.kX.value);
-  private final JoystickButton aButton = new JoystickButton(xboxController, XboxController.Button.kA.value);
-  private final JoystickButton bButton = new JoystickButton(xboxController, XboxController.Button.kB.value);
-  private final JoystickButton yButton = new JoystickButton(xboxController, XboxController.Button.kY.value);
-  private final JoystickButton rTrigger = new JoystickButton(xboxController, XboxController.Button.kStickRight.value);
-  private final JoystickButton lBumper = new JoystickButton(xboxController, XboxController.Button.kBumperLeft.value);
-  private final JoystickButton rBumper = new JoystickButton(xboxController, XboxController.Button.kBumperRight.value);
+  private final Controllers controllers = new Controllers();
 
   public RobotContainer() {
     driveTrain.setInverted(true);
-    driveTrain.setDefaultCommand(new DriveRobot(driveTrain, xboxController));
-    
-    //intake.setDefaultCommand(new GrabBalls(intake, 0.7));
-
+    driveTrain.setDefaultCommand(new DriveRobot(driveTrain, controllers.xboxController));
+    intake.setDefaultCommand(new GrabBalls(intake, controllers.xboxController));
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
     
-    bButton.toggleWhenPressed(new DriveRobot(driveTrain, xboxController));
+    controllers.bButton.toggleWhenPressed(new DriveRobot(driveTrain, controllers.xboxController));
     //yButton.toggleWhenPressed(new IntakeAndConveyor(intake, storageSystem));
-	  xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
-    //aButton.whenHeld(new IntakeAndConveyor(intake, storageSystem, xboxController));
-    rBumper.whenHeld(new GrabBalls(intake, -0.7));
-    aButton.whenHeld(new ActivateConveyor(storageSystem, -0.5));
+	  controllers.xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
+    controllers.yButton.whenHeld(new IntakeAndConveyor(intake, storageSystem, controllers.xboxController));
+    //controllers.rTrigger.whenHeld(new GrabBalls(intake, controllers.xboxController));
+    controllers.aButton.whenHeld(new ActivateConveyor(storageSystem, -0.5));
   }
 
   public ParallelCommandGroup getAutonomousCommand() {

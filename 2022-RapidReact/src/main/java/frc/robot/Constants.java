@@ -20,11 +20,7 @@ public final class Constants {
     public final class Controller{
     // controller
       public static final int CONTROLLER_ID = 0;
-    //buttons
-      public static final int Y_BUTTON = 4;
-      public static final int A_BUTTON = 1;
-      public static final int UP_BUTTON_ID = 6;
-      public static final int DOWN_BUTTON_ID = 7;
+      public static final int JOYSTICK_ID = 1;
     }
 
     public final class Shooter{
