@@ -15,7 +15,7 @@ public class Intake extends SubsystemBase {
 
   public Intake() {
     motor = new VictorSPX(Constants.Intake.MOTOR_ID);
-    motor.setInverted(false);
+    motor.setInverted(true);
   }
 
   public void periodic() {}

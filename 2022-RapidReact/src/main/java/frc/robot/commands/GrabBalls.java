@@ -5,17 +5,19 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Controllers;
 import frc.robot.subsystems.Intake;
 
 public class GrabBalls extends CommandBase {
 
   private final Intake intake;
-  private double speed;
+  private Controllers controllers;
 
-  public GrabBalls(Intake intake, double speed) {
-    this.speed = speed;
+  public GrabBalls(Intake intake, Controllers controllers) {
     this.intake = intake;
+    this.controllers = controllers;
     addRequirements(intake);
    
   }
@@ -25,17 +27,16 @@ public class GrabBalls extends CommandBase {
   }
 
   @Override
-  public void execute() {
-  //   double rightTrigger = xboxController.getRawAxis(XboxController.Axis.kRightTrigger.value);
-  //   double leftTrigger = xboxController.getRawAxis(XboxController.Axis.kLeftTrigger.value);
-  //   if (rightTrigger > 0.3) {
-  //     intake.grabBalls(rightTrigger * 0.7);
-  //   } else if (leftTrigger > 0.3) {
-  //     intake.grabBalls(leftTrigger * -0.7);
-  //   } else {
-  //     intake.grabBalls(0.0);
-  //   }
-  intake.grabBalls(speed);
+  public void execute(){
+    double rightTrigger = controllers.xboxController0.getRawAxis(XboxController.Axis.kRightTrigger.value);
+    if(rightTrigger > 0.3){
+      intake.grabBalls(rightTrigger * 0.7);
+    }else if(controllers.xboxController1.getBumper(Hand.kRight)){
+      intake.grabBalls(-0.7);
+    }else{
+      intake.grabBalls(0);
+    }
+
   }
 
 

@@ -4,30 +4,39 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.StorageSystem;
 
 public class ActivateConveyor extends CommandBase {
 
   private final StorageSystem storageSystem;
-  private double speed;
+  private XboxController xboxController;
 
-  public ActivateConveyor(StorageSystem storageSystem, double speed) {
-    this.speed = speed;
+  public ActivateConveyor(StorageSystem storageSystem, XboxController xboxController) {
     this.storageSystem = storageSystem;
+    this.xboxController = xboxController;
     addRequirements(storageSystem);
+   
   }
 
   @Override
   public void initialize() {
-  
   }
 
   @Override
-  public void execute() {
-    storageSystem.activate(speed);
-  }
+  public void execute(){
+    double leftTrigger = xboxController.getRawAxis(XboxController.Axis.kLeftTrigger.value);
+    if(leftTrigger > 0.3){
+      storageSystem.activate(leftTrigger * 0.7);
+    }else if(xboxController.getBumper(Hand.kLeft)){
+      storageSystem.activate(-0.7);
+    }else{
+      storageSystem.activate(0);
+    }
 
+  }
   @Override
   public void end(boolean interrupted) {
     storageSystem.stop();

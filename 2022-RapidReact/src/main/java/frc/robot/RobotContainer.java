@@ -5,13 +5,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.Climber;
+import frc.robot.commands.ActivateConveyor;
 import frc.robot.commands.DriveRobot;
 import frc.robot.commands.ExtendClimber;
+import frc.robot.commands.GrabBalls;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.StorageSystem;
 import frc.robot.commands.commandgroups.AutoRoutine;
-import frc.robot.commands.commandgroups.IntakeAndConveyor;
 import frc.robot.commands.RetractClimber;
 import frc.robot.commands.Shoot;
 import frc.robot.subsystems.Intake;
@@ -26,24 +28,29 @@ public class RobotContainer {
   private final StorageSystem storageSystem = new StorageSystem();
   private final frc.robot.subsystems.Intake intake = new Intake();
   private final Controllers controllers = new Controllers();
+  // private POVButton povButton = new POVButton(controllers.xboxController, -1);
 
   public RobotContainer() {
     driveTrain.setInverted(true);
-    driveTrain.setDefaultCommand(new DriveRobot(driveTrain, controllers.xboxController));
-    //intake.setDefaultCommand(new GrabBalls(intake, 0));
+    driveTrain.setDefaultCommand(new DriveRobot(driveTrain, controllers.xboxController0));
+    intake.setDefaultCommand(new GrabBalls(intake, controllers));
+    shooter.setDefaultCommand(new Shoot(shooter, controllers));
+    storageSystem.setDefaultCommand(new ActivateConveyor(storageSystem, controllers.xboxController1));
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
     
-    controllers.bButton.toggleWhenPressed(new DriveRobot(driveTrain, controllers.xboxController));
+    controllers.bButton0.toggleWhenPressed(new DriveRobot(driveTrain, controllers.xboxController0));
     //yButton.toggleWhenPressed(new IntakeAndConveyor(intake, storageSystem));
-	  controllers.xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
-    controllers.yButton.whenHeld(new IntakeAndConveyor(intake, storageSystem, 0.7));
-    //controllers.rTrigger.whenHeld(new GrabBalls(intake, controllers.xboxController));
-    controllers.aButton.whenHeld(new IntakeAndConveyor(intake, storageSystem, -0.7));
-    controllers.lBumper.whenPressed(new ExtendClimber(climber, 1));
-    controllers.rBumper.whenPressed(new RetractClimber(climber, 1, 0.4));
+	  //controllers.xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
+    // controllers.yButton.whenHeld(new IntakeAndConveyor(intake, storageSystem, 0.7));s
+    // controllers.aButton.whenHeld(new IntakeAndConveyor(intake, storageSystem, -0.7));
+    controllers.yButton0.whenHeld(new ExtendClimber(climber, 0.7));
+    controllers.xButton0.whenHeld(new RetractClimber(climber, 0.3, 0.9));
+    controllers.aButton0.whenHeld(new RetractClimber(climber, 0, -0.4));
+    //controllers.bButton.whenHeld(new ExtendClimber(climber, -0.7));
+
   }
 
   public ParallelCommandGroup getAutonomousCommand() {

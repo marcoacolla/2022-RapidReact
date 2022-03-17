@@ -4,18 +4,21 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Controller;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Controllers;
 import frc.robot.subsystems.Shooter;
 
 public class Shoot extends CommandBase {
 
     private final Shooter shooter;
-    private double speed;
+    private Controllers controllers;
 
-    public Shoot(Shooter shooter, double speed) {
+    public Shoot(Shooter shooter, Controllers controllers) {
         addRequirements(shooter);
         this.shooter = shooter;
-        this.speed = speed;
+        this.controllers = controllers;
     }
 
     @Override
@@ -24,7 +27,7 @@ public class Shoot extends CommandBase {
 
     @Override
     public void execute() {
-        shooter.activate(speed);
+        shooter.activate(controllers.xboxController1.getRawAxis(3));
     }
 
     @Override

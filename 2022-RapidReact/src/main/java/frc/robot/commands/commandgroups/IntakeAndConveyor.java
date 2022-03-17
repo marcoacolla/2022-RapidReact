@@ -4,7 +4,6 @@
 
 package frc.robot.commands.commandgroups;
 
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.ActivateConveyor;
 import frc.robot.commands.GrabBalls;
@@ -18,12 +17,12 @@ public class IntakeAndConveyor extends ParallelCommandGroup {
 
   
 
-  public IntakeAndConveyor(Intake intake, StorageSystem storageSystem, double speed){
-    addCommands(
-      new GrabBalls(intake, speed),
-      new ActivateConveyor(storageSystem, speed)
-    );
-  }
+  // public IntakeAndConveyor(Intake intake, StorageSystem storageSystem, double speed){
+  //   addCommands(
+  //     new GrabBalls(intake, speed),
+  //     new ActivateConveyor(storageSystem, speed)
+  //   );
+  // }
 
 
 }
