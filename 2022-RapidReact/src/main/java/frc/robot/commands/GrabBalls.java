@@ -11,10 +11,10 @@ import frc.robot.subsystems.Intake;
 public class GrabBalls extends CommandBase {
 
   private final Intake intake;
-  private final XboxController xboxController;
+  private double speed;
 
-  public GrabBalls(Intake intake, XboxController xbox) {
-    this.xboxController = xbox;
+  public GrabBalls(Intake intake, double speed) {
+    this.speed = speed;
     this.intake = intake;
     addRequirements(intake);
    
@@ -26,16 +26,18 @@ public class GrabBalls extends CommandBase {
 
   @Override
   public void execute() {
-    double rightTrigger = xboxController.getRawAxis(XboxController.Axis.kRightTrigger.value);
-    double leftTrigger = xboxController.getRawAxis(XboxController.Axis.kLeftTrigger.value);
-    if (rightTrigger > 0.3) {
-      intake.grabBalls(rightTrigger * 0.7);
-    } else if (leftTrigger > 0.3) {
-      intake.grabBalls(-leftTrigger * 0.7);
-    } else {
-      intake.grabBalls(0.0);
-    }
+  //   double rightTrigger = xboxController.getRawAxis(XboxController.Axis.kRightTrigger.value);
+  //   double leftTrigger = xboxController.getRawAxis(XboxController.Axis.kLeftTrigger.value);
+  //   if (rightTrigger > 0.3) {
+  //     intake.grabBalls(rightTrigger * 0.7);
+  //   } else if (leftTrigger > 0.3) {
+  //     intake.grabBalls(leftTrigger * -0.7);
+  //   } else {
+  //     intake.grabBalls(0.0);
+  //   }
+  intake.grabBalls(speed);
   }
+
 
   @Override
   public void end(boolean interrupted) {

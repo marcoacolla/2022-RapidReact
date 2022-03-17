@@ -12,30 +12,29 @@ import frc.robot.Constants;
 
 public class Climber extends SubsystemBase {
 
+
   private final VictorSP upMaster = new VictorSP(Constants.Climber.UP_MASTER_ID);
   private final VictorSP downMaster = new VictorSP(Constants.Climber.DOWN_MASTER_ID);
-  private final VictorSP upSlave = new VictorSP(Constants.Climber.UP_SLAVE_ID);
   private final VictorSP downSlave = new VictorSP(Constants.Climber.DOWN_SLAVE_ID);
 
-  private final SpeedControllerGroup upGroup = new SpeedControllerGroup(upMaster, upSlave);
-  private final SpeedControllerGroup downGroup = new SpeedControllerGroup(downMaster, downSlave);
+  private final SpeedControllerGroup downGroup = new SpeedControllerGroup(downSlave, downMaster);
 
   public Climber() {
   }
 
   public void setClimberSpeed(double speed){
-    upGroup.set(speed);
     downGroup.set(speed);
+    upMaster.set(speed);
   }
 
   public void extendClimber(double speed){
-    upGroup.set(speed);
+    upMaster.set(speed);
     downGroup.set(0);
   }
 
-  public void retractClimber(double speed){
-    upGroup.set(0);
-    downGroup.set(-speed);
+  public void retractClimber(double speedUp, double speedDown){
+    upMaster.set(-speedUp);
+    downGroup.set(speedDown);
   }
 
   @Override

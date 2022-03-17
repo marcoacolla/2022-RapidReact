@@ -15,8 +15,6 @@ package frc.robot;
  */
 public final class Constants {
 
-
-
     public final class Controller{
     // controller
       public static final int CONTROLLER_ID = 0;
@@ -45,23 +43,22 @@ public final class Constants {
     // motors
       public static final int CONV_ID = 20;
     // speeds
-      public static final double SPEED = -0.8;
+      public static final double SPEED = 0.8;
     }
 
     public final class Intake{
     //motors
       public static final int MOTOR_ID = 10;
     // speed
-      public static final double MAX_SPEED = -0.7;
+      public static final double MAX_SPEED = 0.7;
       public static final double DEADBAND = 0.3;
     }
 
     public final class Climber{
     //motors
-      public static final int UP_MASTER_ID = 8;
-      public static final int UP_SLAVE_ID = 9;
-      public static final int DOWN_MASTER_ID = 10;
-      public static final int DOWN_SLAVE_ID = 11;
+      public static final int DOWN_SLAVE_ID = 1;
+      public static final int DOWN_MASTER_ID = 0;
+      public static final int UP_MASTER_ID = 2;
     // speeds
       public static final double SPEED = 0.5;
     }

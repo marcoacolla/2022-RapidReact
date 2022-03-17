@@ -18,12 +18,13 @@ public class IntakeAndConveyor extends ParallelCommandGroup {
 
   
 
-  /** Creates a new Inwtaker. */
-  public IntakeAndConveyor(Intake intake, StorageSystem storageSystem, XboxController xboxController){
+  public IntakeAndConveyor(Intake intake, StorageSystem storageSystem, double speed){
     addCommands(
-      new GrabBalls(intake, xboxController),
-      new ActivateConveyor(storageSystem, -0.6)
+      new GrabBalls(intake, speed),
+      new ActivateConveyor(storageSystem, speed)
     );
   }
+
+
 }
 

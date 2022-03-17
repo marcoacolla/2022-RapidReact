@@ -10,12 +10,14 @@ import frc.robot.subsystems.Climber;
 public class RetractClimber extends CommandBase {
   /** Creates a new RetractClimber. */
   private Climber climber;
-  private double speed;
+  private double speedUp;
+  private double speedDown;
 
-  public RetractClimber(Climber climber, double speed) {
+  public RetractClimber(Climber climber, double speedUp, double speedDown) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.climber = climber;
-    this.speed = speed;
+    this.speedUp = speedUp;
+    this.speedDown = speedDown;
     addRequirements(climber);
   }
 
@@ -24,7 +26,7 @@ public class RetractClimber extends CommandBase {
 
   @Override
   public void execute() {
-    climber.retractClimber(speed);
+    climber.retractClimber(speedUp, speedDown);
   }
 
 
