@@ -6,7 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.subsystems.Climber;
-import frc.robot.commands.ActivateConveyor;
+import frc.robot.commands.ActivateStorage;
 import frc.robot.commands.DriveRobot;
 import frc.robot.commands.ExtendClimber;
 import frc.robot.commands.GrabBalls;
@@ -34,7 +34,7 @@ public class RobotContainer {
     driveTrain.setDefaultCommand(new DriveRobot(driveTrain, controllers.xboxController0));
     intake.setDefaultCommand(new GrabBalls(intake, controllers));
     shooter.setDefaultCommand(new Shoot(shooter, controllers));
-    storageSystem.setDefaultCommand(new ActivateConveyor(storageSystem, controllers.xboxController1));
+    storageSystem.setDefaultCommand(new ActivateStorage(storageSystem, controllers.xboxController1));
     configureButtonBindings();
   }
 

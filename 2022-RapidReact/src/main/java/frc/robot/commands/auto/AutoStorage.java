@@ -8,14 +8,14 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.StorageSystem;
 
-public class AutoConveyor extends CommandBase {
+public class AutoStorage extends CommandBase {
 
   private final StorageSystem storageSystem;
   private double speed;
   private double time;
   private Timer timer = new Timer();
 
-  public AutoConveyor(StorageSystem storageSystem, double speed, double time) {
+  public AutoStorage(StorageSystem storageSystem, double speed, double time) {
     this.speed = speed;
     this.time = time;
     this.storageSystem = storageSystem;
