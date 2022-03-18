@@ -34,8 +34,8 @@ public class DriveRobot extends CommandBase {
     double moveSpeed = Math.abs(moveLeft) > Math.abs(moveRight) ? moveLeft : moveRight;
     double rotateSpeed = Math.abs(turnLeft) > Math.abs(turnRight) ? turnLeft : turnRight;
 
-    moveSpeed*=0.7;
-    rotateSpeed*=0.7;
+    moveSpeed*=0.8;
+    rotateSpeed*=0.8;
 
     //A inversão usa o moveSpeed sem sinal negativo porque o robô já está invertido por padrão
     if(driveTrain.isInverted()){
