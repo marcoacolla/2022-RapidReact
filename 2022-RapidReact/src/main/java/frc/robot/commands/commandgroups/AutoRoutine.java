@@ -5,8 +5,12 @@
 package frc.robot.commands.commandgroups;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Constants;
+import frc.robot.commands.auto.AutoConveyor;
+import frc.robot.commands.auto.AutoIntake;
 import frc.robot.commands.auto.AutoShoot;
+import frc.robot.commands.auto.DriveStraight;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.StorageSystem;
@@ -20,7 +24,17 @@ public class AutoRoutine extends ParallelCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new AutoNoShooter(storageSystem, shooter, driveTrain, intake),
+      //new AutoNoShooter(storageSystem, shooter, driveTrain, intake),
+
+      new SequentialCommandGroup(
+        new AutoConveyor(storageSystem, Constants.Storage.SPEED, 4),
+        new ParallelCommandGroup(
+          new AutoIntake(intake, 4),
+          new DriveStraight(driveTrain, 0.6, 3.5)
+        ),
+        new DriveStraight(driveTrain, -0.7, 3),
+        new AutoConveyor(storageSystem, Constants.Storage.SPEED, 4)
+      ),
       new AutoShoot(shooter, -Constants.Shooter.SPEED, time)
     );
   }
