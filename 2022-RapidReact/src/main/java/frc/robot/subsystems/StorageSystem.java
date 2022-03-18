@@ -11,7 +11,7 @@ import frc.robot.Constants;
 
 public class StorageSystem extends SubsystemBase {
 
-  private final VictorSPX motor = new VictorSPX(Constants.Storage.CONV_ID);
+  private final VictorSPX motor = new VictorSPX(Constants.Storage.STRG_ID);
 
   public StorageSystem() {
     motor.setInverted(false);

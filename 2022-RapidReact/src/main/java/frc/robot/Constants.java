@@ -35,7 +35,7 @@ public final class Constants {
 
     public final class Storage{
     // motors
-      public static final int CONV_ID = 20;
+      public static final int STRG_ID = 20;
     // speeds
       public static final double SPEED = 0.8;
     }
