@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.Climber;
 import frc.robot.commands.ActivateConveyor;
 import frc.robot.commands.DriveRobot;
@@ -49,7 +48,7 @@ public class RobotContainer {
     controllers.yButton0.whenHeld(new ExtendClimber(climber, 0.7));
     controllers.xButton0.whenHeld(new RetractClimber(climber, 0.3, 0.9));
     controllers.aButton0.whenHeld(new RetractClimber(climber, 0, -0.4));
-    //controllers.bButton.whenHeld(new ExtendClimber(climber, -0.7));
+    controllers.lBumper0.whenHeld(new ExtendClimber(climber, -0.7));
 
   }
 
