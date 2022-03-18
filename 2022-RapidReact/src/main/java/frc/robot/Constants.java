@@ -15,12 +15,6 @@ package frc.robot;
  */
 public final class Constants {
 
-    public final class Controller{
-    // controller
-      public static final int CONTROLLER_ID = 0;
-      public static final int JOYSTICK_ID = 1;
-    }
-
     public final class Shooter{
     // motors
       public static final int RIGHT_MOTOR_ID = 30;
