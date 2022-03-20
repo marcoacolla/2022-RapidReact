@@ -14,29 +14,47 @@ import frc.robot.commands.auto.DriveStraight;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.StorageSystem;
+import frc.robot.subsystems.DriveTrain;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class AutoRoutine extends ParallelCommandGroup {
-  /** Creates a new AutoRoutineShooter. */
-  public AutoRoutine(StorageSystem storageSystem, Shooter shooter, frc.robot.subsystems.DriveTrain driveTrain, Intake intake, double time) {
-    // Add your commands in the addCommands() call, e.g.
-    // addCommands(new FooCommand(), new BarCommand());
-    addCommands(
-      //new AutoNoShooter(storageSystem, shooter, driveTrain, intake),
 
-      new SequentialCommandGroup(
-        new AutoStorage(storageSystem, Constants.Storage.SPEED, 4),
-        new ParallelCommandGroup(
-          new AutoIntake(intake, 4),
-          new DriveStraight(driveTrain, 0.6, 3.5)
-        ),
-        new DriveStraight(driveTrain, -0.7, 3),
-        new AutoStorage(storageSystem, Constants.Storage.SPEED, 4)
-      ),
-      new AutoShoot(shooter, -Constants.Shooter.SPEED, time)
-    );
+  public enum AutoMode {
+	ONE_BALL,
+	ONE_BALL_TARMAC,
+	TWO_BALLS,
+  }
+
+  public AutoRoutine(StorageSystem storageSystem, Shooter shooter, DriveTrain driveTrain, Intake intake, double time, AutoMode autoMode) {
+	if (autoMode == AutoMode.ONE_BALL) {
+	  addCommands(
+		new AutoStorage(storageSystem, Constants.Storage.SPEED, 4),
+	    new AutoShoot(shooter, -Constants.Shooter.SPEED, time)
+	  );
+	} else if (autoMode == AutoMode.ONE_BALL_TARMAC) {
+	  addCommands(
+	    new SequentialCommandGroup(
+		  new AutoStorage(storageSystem, Constants.Storage.SPEED, 4),
+		  new DriveStraight(driveTrain, 0.6, 3.5)
+		),
+	    new AutoShoot(shooter, -Constants.Shooter.SPEED, time)
+	  );
+	} else if (autoMode == AutoMode.TWO_BALLS) {
+	  addCommands(
+	    new SequentialCommandGroup(
+		  new AutoStorage(storageSystem, Constants.Storage.SPEED, 4),
+		  new ParallelCommandGroup(
+		    new AutoIntake(intake, 4),
+		    new DriveStraight(driveTrain, 0.6, 3.5)
+		  ),
+		  new DriveStraight(driveTrain, -0.7, 3),
+		  new AutoStorage(storageSystem, Constants.Storage.SPEED, 4)
+		),
+	    new AutoShoot(shooter, -Constants.Shooter.SPEED, time)
+	  );
+	}
   }
 
 }

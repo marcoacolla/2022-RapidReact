@@ -39,7 +39,6 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    
     controllers.bButton0.toggleWhenPressed(new DriveRobot(driveTrain, controllers.xboxController0));
     //yButton.toggleWhenPressed(new IntakeAndConveyor(intake, storageSystem));
 	  //controllers.xButton.toggleWhenPressed(new Shoot(shooter, Constants.Shooter.SPEED));
@@ -49,10 +48,9 @@ public class RobotContainer {
     controllers.xButton0.whenHeld(new RetractClimber(climber, 0.3, 0.9));
     controllers.aButton0.whenHeld(new RetractClimber(climber, 0, -0.4));
     controllers.lBumper0.whenHeld(new ExtendClimber(climber, -0.7));
-
   }
 
   public ParallelCommandGroup getAutonomousCommand() {
-    return new AutoRoutine(storageSystem, shooter, driveTrain, intake, 15);
+    return new AutoRoutine(storageSystem, shooter, driveTrain, intake, 15, AutoRoutine.AutoMode.ONE_BALL);
   }
 }
